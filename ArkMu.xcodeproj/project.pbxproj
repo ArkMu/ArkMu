@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3369FF2B209BF3EF00C395C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF2A209BF3EF00C395C6 /* AppDelegate.m */; };
-		3369FF2E209BF3EF00C395C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF2D209BF3EF00C395C6 /* ViewController.m */; };
 		3369FF31209BF3EF00C395C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3369FF2F209BF3EF00C395C6 /* Main.storyboard */; };
 		3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3369FF32209BF3F100C395C6 /* Assets.xcassets */; };
 		3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3369FF34209BF3F100C395C6 /* LaunchScreen.storyboard */; };
 		3369FF39209BF3F100C395C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF38209BF3F100C395C6 /* main.m */; };
+		3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF75209C9ED500C395C6 /* MessageVC.m */; };
+		3369FF7A209CA1F400C395C6 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF79209CA1F400C395C6 /* PostCell.m */; };
+		3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF7F209CA3AA00C395C6 /* StreamModel.m */; };
+		3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF82209CA50900C395C6 /* ColumnModel.m */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
@@ -20,13 +23,20 @@
 		3369FF26209BF3EF00C395C6 /* ArkMu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArkMu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3369FF29209BF3EF00C395C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3369FF2A209BF3EF00C395C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3369FF2C209BF3EF00C395C6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3369FF2D209BF3EF00C395C6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3369FF30209BF3EF00C395C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3369FF32209BF3F100C395C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3369FF35209BF3F100C395C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3369FF37209BF3F100C395C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3369FF38209BF3F100C395C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3369FF74209C9ED500C395C6 /* MessageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageVC.h; sourceTree = "<group>"; };
+		3369FF75209C9ED500C395C6 /* MessageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageVC.m; sourceTree = "<group>"; };
+		3369FF77209C9F1D00C395C6 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		3369FF78209CA1F400C395C6 /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		3369FF79209CA1F400C395C6 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		3369FF7E209CA3AA00C395C6 /* StreamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamModel.h; sourceTree = "<group>"; };
+		3369FF7F209CA3AA00C395C6 /* StreamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamModel.m; sourceTree = "<group>"; };
+		3369FF81209CA50900C395C6 /* ColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnModel.h; sourceTree = "<group>"; };
+		3369FF82209CA50900C395C6 /* ColumnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColumnModel.m; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,17 +83,56 @@
 		3369FF28209BF3EF00C395C6 /* ArkMu */ = {
 			isa = PBXGroup;
 			children = (
-				3369FF29209BF3EF00C395C6 /* AppDelegate.h */,
-				3369FF2A209BF3EF00C395C6 /* AppDelegate.m */,
-				3369FF2C209BF3EF00C395C6 /* ViewController.h */,
-				3369FF2D209BF3EF00C395C6 /* ViewController.m */,
-				3369FF2F209BF3EF00C395C6 /* Main.storyboard */,
+				3369FF77209C9F1D00C395C6 /* Common.h */,
+				3369FF73209C9E3F00C395C6 /* Model */,
+				3369FF72209C9E3B00C395C6 /* View */,
+				3369FF71209C9E3700C395C6 /* Controller */,
+				3369FF70209C9E3200C395C6 /* SupportFile */,
 				3369FF32209BF3F100C395C6 /* Assets.xcassets */,
 				3369FF34209BF3F100C395C6 /* LaunchScreen.storyboard */,
 				3369FF37209BF3F100C395C6 /* Info.plist */,
-				3369FF38209BF3F100C395C6 /* main.m */,
 			);
 			path = ArkMu;
+			sourceTree = "<group>";
+		};
+		3369FF70209C9E3200C395C6 /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				3369FF29209BF3EF00C395C6 /* AppDelegate.h */,
+				3369FF2A209BF3EF00C395C6 /* AppDelegate.m */,
+				3369FF38209BF3F100C395C6 /* main.m */,
+			);
+			path = SupportFile;
+			sourceTree = "<group>";
+		};
+		3369FF71209C9E3700C395C6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3369FF74209C9ED500C395C6 /* MessageVC.h */,
+				3369FF75209C9ED500C395C6 /* MessageVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3369FF72209C9E3B00C395C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3369FF2F209BF3EF00C395C6 /* Main.storyboard */,
+				3369FF78209CA1F400C395C6 /* PostCell.h */,
+				3369FF79209CA1F400C395C6 /* PostCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3369FF73209C9E3F00C395C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3369FF7E209CA3AA00C395C6 /* StreamModel.h */,
+				3369FF7F209CA3AA00C395C6 /* StreamModel.m */,
+				3369FF81209CA50900C395C6 /* ColumnModel.h */,
+				3369FF82209CA50900C395C6 /* ColumnModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4BA196282A37D35548A4755E /* Pods */ = {
@@ -219,9 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3369FF2E209BF3EF00C395C6 /* ViewController.m in Sources */,
 				3369FF39209BF3F100C395C6 /* main.m in Sources */,
+				3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */,
+				3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */,
 				3369FF2B209BF3EF00C395C6 /* AppDelegate.m in Sources */,
+				3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */,
+				3369FF7A209CA1F400C395C6 /* PostCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +416,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ArkMu/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = sky.ArkMu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -378,7 +434,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ArkMu/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = sky.ArkMu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
