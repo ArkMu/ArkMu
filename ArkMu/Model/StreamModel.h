@@ -12,6 +12,7 @@
 
 @interface StreamModel : NSObject
 
+@property (nonatomic, assign) NSInteger streamId;
 @property (nonatomic, assign) NSInteger feedId;
 @property (nonatomic, strong) NSString *entityType;
 @property (nonatomic, strong) NSString *state;

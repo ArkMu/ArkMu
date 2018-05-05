@@ -19,6 +19,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     self = [super init];
     if (self) {
+        self.streamId = [[dict valueForKey:@"id"] integerValue];
         self.feedId = [[dict valueForKey:@"feed_id"] integerValue];
         self.entityType = [dict valueForKey:@"entity_type"];
         self.state = [dict valueForKey:@"state"];

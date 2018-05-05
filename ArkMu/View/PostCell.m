@@ -30,7 +30,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:17.0];
-    titleLabel.textColor = AK102Color;
+    titleLabel.textColor = AKBlackColor;
     titleLabel.numberOfLines = 0;
     [self addSubview:titleLabel];
     _titleLabel = titleLabel;
@@ -96,18 +96,25 @@
     
     CGRect frame = [[UIScreen mainScreen] bounds];
     
-    CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 8 - 112, 140) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0]} context:NULL];
-    _titleLabel.text = streamModel.title;
-    [_titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(rect.size.height);
-    }];
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 8 - 112, 140) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0]} context:NULL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf.titleLabel.text = streamModel.title;
+            [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(rect.size.height);
+            }];
+        });
+    });
     
     _descLabel.text = streamModel.columnModel.name;
     _favouriteLabel.text = [NSString stringWithFormat:@"%ld 喜欢", streamModel.favouriteNum];
     
 
-    if (streamModel.imgsArr.count > 0) {
+    if (streamModel.imgsArr.count > 0 && ![streamModel.imgsArr.firstObject isKindOfClass:[UIImage class]]) {
         __weak typeof(self) weakSelf = self;
+        __block StreamModel *blockModel = streamModel;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:streamModel.imgsArr.firstObject]];
@@ -122,8 +129,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 strongSelf.imgView.image = clipImage;
+                blockModel.imgsArr = [NSArray arrayWithObject:clipImage];
+                strongSelf.streamModel = blockModel;
             });
         });
+    } else {
+        self.imgView.image = streamModel.imgsArr.firstObject;
     }
 }
 

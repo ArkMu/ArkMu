@@ -11,4 +11,5 @@ target 'ArkMu' do
   pod 'Masonry'
   pod 'SDWebImage', '~> 4.0'
   pod 'ReactiveCocoa', '~> 2.4.0'
+  pod 'MJRefresh'
 end

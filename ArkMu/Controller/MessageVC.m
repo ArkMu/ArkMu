@@ -18,8 +18,10 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
 
 @interface MessageVC () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray *dataArr;
+@property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 
 @end
 
@@ -50,9 +52,23 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _operationQueue = [[NSOperationQueue alloc] init];
+    _operationQueue.maxConcurrentOperationCount = 1;
+    _dataArr = [NSMutableArray array];
+    
+    [self arkMuLoadDataFromServerWithBId:0];
+}
+
+- (void)arkMuLoadDataFromServerWithBId:(NSInteger)bid {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableArray *itemsArr = [NSMutableArray array];
-    [manager GET:AKStreamUrl parameters:@{@"feed_id": @59, @"per_page": @20} progress:^(NSProgress * _Nonnull downloadProgress) {
+    
+    NSMutableDictionary *parametersDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@59, @"feed_id", @20, @"per_page", nil];
+    if (bid != 0) {
+        [parametersDic setValue:@(bid) forKey:@"b_id"];
+    }
+    
+    [manager GET:AKStreamUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSArray *responseArr = [[(NSDictionary *)responseObject valueForKey:@"data"] valueForKey:@"items"];
@@ -63,12 +79,11 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
             [itemsArr addObject:model];
         }
         
-        self.dataArr = itemsArr;
+        [self.dataArr addObjectsFromArray:itemsArr];
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
     }];
-    
 }
 
 #pragma mark - UITableViewDataSource

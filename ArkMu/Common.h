@@ -17,5 +17,7 @@
 
 #define AK102Color          AKColor(102,102,102)
 #define AK204Color          AKColor(204,204,204)
+#define AKBlackColor        AKColor(0,0,0)
+#define AKWhiteColor        AKColor(255,255,255)
 
 #endif /* Common_h */

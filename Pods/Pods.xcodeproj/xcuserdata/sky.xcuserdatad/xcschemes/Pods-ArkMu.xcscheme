@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5D02E17CB537E09A3068EF1C11228090"
+               BlueprintIdentifier = "E40FBF292A6C4ED9A2657FB3D2735D49"
                BlueprintName = "Pods-ArkMu"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libPods-ArkMu.a">

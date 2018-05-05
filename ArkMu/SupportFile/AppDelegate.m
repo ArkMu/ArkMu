@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "Common.h"
 #import "MessageVC.h"
 
 @interface AppDelegate ()
@@ -23,6 +24,10 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[MessageVC alloc] init]];
     _window.rootViewController = nav;
     [_window makeKeyAndVisible];
+    
+    [[UINavigationBar appearance] setTintColor:AKBlackColor];
+    [[UINavigationBar appearance] setBarTintColor:AKWhiteColor];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
     
     return YES;
 }
