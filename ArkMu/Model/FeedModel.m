@@ -21,6 +21,7 @@
         self.title = [dict valueForKey:@"title"];
         self.url = [dict valueForKey:@"url"];
         self.cover = [dict valueForKey:@"cover"];
+        self.coverImage = nil;
     }
     
     return self;

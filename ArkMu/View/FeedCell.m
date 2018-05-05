@@ -25,6 +25,8 @@
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UILabel *commentLabel;
 
+@property (nonatomic, assign) NSInteger currentIndex;
+
 @end
 
 @implementation FeedCell
@@ -86,6 +88,8 @@
     [containerView addSubview:centerImageView];
     [containerView addSubview:rightImageView];
     
+    centerImageView.userInteractionEnabled = YES;
+    
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(containerView);
         make.size.mas_equalTo(containerView);
@@ -103,11 +107,83 @@
         make.leading.mas_equalTo(containerView.mas_trailing);
     }];
     
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionForGestureOnCenterImageView)];
+    [_centerImgView addGestureRecognizer:tap];
+    
     return self;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)actionForGestureOnCenterImageView {
+    if (_gotoWebView) {
+        FeedModel *model = _feedArr[_currentIndex];
+        _gotoWebView(model.url);
+    }
+}
+
+- (void)updateImageState {
+    _currentIndex = [self indexEnabled:_currentIndex++];
+    [self setImageViewForScrollView];
+}
+
+- (void)setFeedArr:(NSArray<FeedModel *> *)feedArr {
+    _feedArr = feedArr;
     
+    _pageControl.numberOfPages = feedArr.count;
+    _pageControl.currentPage = _currentIndex;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (int i = 0; i < feedArr.count; i++) {
+            FeedModel *model = feedArr[i];
+            if (model.coverImage == nil) {
+                NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.cover]];
+                UIImage *image = [UIImage imageWithData:imgData];
+                model.coverImage = image;
+            }
+        }
+    });
+    
+    
+}
+
+- (NSInteger)indexEnabled:(NSInteger)index {
+    if (index < 0) {
+        return _feedArr.count - 1;
+    } else if (index > _feedArr.count) {
+        return 0;
+    } else {
+        return index;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView.contentOffset.x == 0) {
+        _currentIndex--;
+    } else if (scrollView.contentOffset.x == 2 * scrollView.frame.size.width) {
+        _currentIndex++;
+    }
+    
+    _currentIndex = [self indexEnabled:_currentIndex];
+    
+    [self setImageViewForScrollView];
+}
+
+- (void)setImageViewForScrollView {
+    _pageControl.currentPage = _currentIndex;
+    
+    NSInteger leftIndex = [self indexEnabled:_currentIndex - 1];
+    FeedModel *leftModel = _feedArr[leftIndex];
+    _leftImgView.image = leftModel.coverImage;
+    
+    NSInteger currentIndex = [self indexEnabled:_currentIndex];
+    FeedModel *currentModel = _feedArr[currentIndex];
+    _centerImgView.image = currentModel.coverImage;
+    
+    NSInteger rightIndex = [self indexEnabled:_currentIndex + 1];
+    FeedModel *rightModel = _feedArr[rightIndex];
+    _rightImgView.image = rightModel.coverImage;
+    
+    _commentLabel.text = currentModel.title;
 }
 
 - (void)awakeFromNib {

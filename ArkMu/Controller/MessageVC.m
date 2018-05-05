@@ -21,6 +21,9 @@
 #import "NewFlashCell.h"
 #import "AlbumCell.h"
 
+#import "FeedModel.h"
+#import "FeedCell.h"
+
 static NSString *PostCellIdentifier = @"PostCellIdetifier";
 static NSString *MonoGraphicCellIdentifier = @"MonoGraphicCellIdentifier";
 static NSString *NewFlashCellIdentifier = @"NewFlashCellIdentifier";
@@ -31,7 +34,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
+@property (nonatomic, strong) NSMutableArray *feedArr;
 
 @end
 
@@ -66,8 +69,6 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _operationQueue = [[NSOperationQueue alloc] init];
-    _operationQueue.maxConcurrentOperationCount = 1;
     _dataArr = [NSMutableArray array];
     
     __weak typeof(self) weakSelf = self;
@@ -103,6 +104,9 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 - (void)arkMuLoadDataFromServerWithBId:(NSInteger)bid state:(BOOL)isTop {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+   
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(3);
+    
     NSMutableArray *itemsArr = [NSMutableArray array];
     
     NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
@@ -133,29 +137,88 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
         }
         
         [strongSelf.dataArr addObjectsFromArray:itemsArr];
-        [strongSelf.tableView reloadData];
         
-        if ([strongSelf.tableView.mj_header isRefreshing]) {
-            [strongSelf.tableView.mj_header endRefreshing];
-        }
+        dispatch_semaphore_signal(semaphore);
         
-        if ([strongSelf.tableView.mj_footer isRefreshing]) {
-            [strongSelf.tableView.mj_footer endRefreshing];
-        }
+//        [strongSelf.tableView reloadData];
+//
+//        if ([strongSelf.tableView.mj_header isRefreshing]) {
+//            [strongSelf.tableView.mj_header endRefreshing];
+//        }
+//
+//        if ([strongSelf.tableView.mj_footer isRefreshing]) {
+//            [strongSelf.tableView.mj_footer endRefreshing];
+//        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
         
         [SVProgressHUD showWithStatus:@"网络状况不佳"];
         
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if ([strongSelf.tableView.mj_header isRefreshing]) {
-            [strongSelf.tableView.mj_header endRefreshing];
-        }
+        dispatch_semaphore_signal(semaphore);
         
-        if ([strongSelf.tableView.mj_footer isRefreshing]) {
-            [strongSelf.tableView.mj_footer endRefreshing];
-        }
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//        if ([strongSelf.tableView.mj_header isRefreshing]) {
+//            [strongSelf.tableView.mj_header endRefreshing];
+//        }
+//
+//        if ([strongSelf.tableView.mj_footer isRefreshing]) {
+//            [strongSelf.tableView.mj_footer endRefreshing];
+//        }
     }];
+    
+    if (isTop) {
+        [parametersDic removeAllObjects];
+        [parametersDic setValue:@59 forKey:@"feed_id"];
+        [parametersDic setValue:@"feed" forKey:@"type"];
+        
+        __weak typeof(self) weakSelf = self;
+        [manager GET:AKFocusUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
+            for (int i = 0; i < itemsArr.count; i++) {
+                NSDictionary *dict = itemsArr[i];
+                FeedModel *model = [FeedModel modelWithDictionary:dict];
+                if (strongSelf.feedArr == nil) {
+                    strongSelf.feedArr = [NSMutableArray array];
+                }
+                
+                [strongSelf.feedArr addObject:model];
+            }
+            
+            dispatch_semaphore_signal(semaphore);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [SVProgressHUD showWithStatus:@"网络状况不佳"];
+            
+            dispatch_semaphore_signal(semaphore);
+        }];
+        
+        
+        [parametersDic removeAllObjects];
+        [parametersDic setValue:@59 forKey:@"feed_id"];
+        [parametersDic setValue:@"feed_second_level" forKey:@"type"];
+        
+        [manager GET:AKFocusUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
+    }
+    
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    
+    [self.tableView reloadData];
+    
+    if ([self.tableView.mj_header isRefreshing]) {
+        [self.tableView.mj_header endRefreshing];
+    }
+    
+    if ([self.tableView.mj_footer isRefreshing]) {
+        [self.tableView.mj_footer endRefreshing];
+    }
 }
 
 #pragma mark - UITableViewDataSource

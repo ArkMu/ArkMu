@@ -24,6 +24,7 @@
 		3369FF7A209CA1F400C395C6 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF79209CA1F400C395C6 /* PostCell.m */; };
 		3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF7F209CA3AA00C395C6 /* StreamModel.m */; };
 		3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF82209CA50900C395C6 /* ColumnModel.m */; };
+		3373DF1C209D8CC70024A673 /* TypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3373DF1B209D8CC70024A673 /* TypeModel.m */; };
 		33A4783B209D323B00EF8E3E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4783A209D323B00EF8E3E /* Reachability.m */; };
 		33A4783E209D3D0E00EF8E3E /* MonoGraphicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4783D209D3D0E00EF8E3E /* MonoGraphicCell.m */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
@@ -63,6 +64,8 @@
 		3369FF7F209CA3AA00C395C6 /* StreamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamModel.m; sourceTree = "<group>"; };
 		3369FF81209CA50900C395C6 /* ColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnModel.h; sourceTree = "<group>"; };
 		3369FF82209CA50900C395C6 /* ColumnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColumnModel.m; sourceTree = "<group>"; };
+		3373DF1A209D8CC70024A673 /* TypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeModel.h; sourceTree = "<group>"; };
+		3373DF1B209D8CC70024A673 /* TypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeModel.m; sourceTree = "<group>"; };
 		33A47839209D323B00EF8E3E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		33A4783A209D323B00EF8E3E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		33A4783C209D3D0E00EF8E3E /* MonoGraphicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonoGraphicCell.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				3369FF82209CA50900C395C6 /* ColumnModel.m */,
 				333454A6209D7CC1005B2513 /* FeedModel.h */,
 				333454A7209D7CC1005B2513 /* FeedModel.m */,
+				3373DF1A209D8CC70024A673 /* TypeModel.h */,
+				3373DF1B209D8CC70024A673 /* TypeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */,
 				3369FF7A209CA1F400C395C6 /* PostCell.m in Sources */,
 				33345484209D4AAC005B2513 /* AlbumCell.m in Sources */,
+				3373DF1C209D8CC70024A673 /* TypeModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
