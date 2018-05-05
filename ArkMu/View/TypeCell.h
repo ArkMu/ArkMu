@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class 
+@class TypeModel;
 
 @interface TypeCell : UITableViewCell
+
+@property (nonatomic, strong) NSArray <TypeModel *> *typeArr;
+
+@property (nonatomic, copy) void (^gotoWebView)(NSString *urlStr);
 
 @end

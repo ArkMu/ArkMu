@@ -10,4 +10,23 @@
 
 @implementation TypeModel
 
++ (instancetype)modelWithDictionary:(NSDictionary *)dict {
+    return [[self alloc] initWithDictionary:dict];
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict {
+    self = [super init];
+    
+    if (self) {
+        self.type = [dict valueForKey:@"type"];
+        self.title = [dict valueForKey:@"title"];
+        self.url = [dict valueForKey:@"url"];
+        self.cover = [dict valueForKey:@"cover"];
+        
+        self.coverArr = [NSArray array];
+    }
+    
+    return self;
+}
+
 @end

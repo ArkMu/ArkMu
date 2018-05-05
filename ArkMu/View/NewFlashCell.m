@@ -43,6 +43,7 @@
     typeLabel.textColor = AKBlackColor;
     typeLabel.text = @"快讯";
     typeLabel.backgroundColor = AKLightBlueColor;
+    typeLabel.textAlignment = NSTextAlignmentCenter;
     typeLabel.layer.cornerRadius = 4;
     typeLabel.layer.masksToBounds = YES;
     [self addSubview:typeLabel];
@@ -61,7 +62,7 @@
     [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(lineView);
         make.bottom.mas_equalTo(lineView.mas_top).mas_equalTo(-14 + 1.0 / scale);
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(40);
         make.height.mas_equalTo(21);
     }];
     

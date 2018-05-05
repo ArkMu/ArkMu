@@ -11,6 +11,7 @@
 #import "Common.h"
 #import "StreamModel.h"
 #import <Masonry.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MonoGraphicCell ()
 
@@ -84,7 +85,16 @@
     CGRect frame = [[UIScreen mainScreen] bounds];
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: AKCustomFont(17)} context:nil];
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineBreakMode = NSLineBreakByCharWrapping;
+        paragraph.alignment = NSTextAlignmentLeft;
+        paragraph.lineSpacing = 6;
+        paragraph.firstLineHeadIndent = 0.0;
+        paragraph.paragraphSpacingBefore = 0.0;
+        paragraph.headIndent = 0.0;
+        paragraph.tailIndent = 0.0;
+        NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
+        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
         __weak typeof(weakSelf) strongSelf = weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -94,28 +104,21 @@
     });
     
     NSString *urlStr = streamModel.imgsArr.firstObject;
-    if ([urlStr isKindOfClass:[NSString class]]) {
-        __weak typeof(self) weakSelf = self;
-        __block StreamModel *blockModel = streamModel;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
-            UIImage *img = [UIImage imageWithData:imgData];
-            UIGraphicsBeginImageContextWithOptions(img.size, NO, 0);
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, frame.size.width - 28, img.size.height) cornerRadius:12];
-            [path addClip];
-            [img drawAtPoint:CGPointZero];
-            UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:urlStr] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
+        [path addClip];
+        [image drawAtPoint:CGPointZero];
+        UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.imgView.image = clipImage;
-                blockModel.imgsArr = [NSArray arrayWithObject:clipImage];
-            });
+            strongSelf.imgView.image = clipImage;
+            [strongSelf.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo((AKScreenWidth - 28) / clipImage.size.width * clipImage.size.height);
+            }];
         });
-    } else {
-        self.imgView.image = (UIImage *)streamModel.imgsArr.firstObject;
-    }
+    }];
     
     _timeLabel.text = [NSString stringWithFormat:@"%@", streamModel.publishedAtTime];
 }

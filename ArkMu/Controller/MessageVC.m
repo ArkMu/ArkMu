@@ -24,6 +24,12 @@
 #import "FeedModel.h"
 #import "FeedCell.h"
 
+#import "TypeModel.h"
+#import "TypeCell.h"
+
+static NSString *FeedCellIdentifier = @"FeedCellIdentifier";
+static NSString *TypeCellIdentifier = @"TypeCellIdentifier";
+
 static NSString *PostCellIdentifier = @"PostCellIdetifier";
 static NSString *MonoGraphicCellIdentifier = @"MonoGraphicCellIdentifier";
 static NSString *NewFlashCellIdentifier = @"NewFlashCellIdentifier";
@@ -35,6 +41,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *feedArr;
+@property (nonatomic, strong) NSMutableArray *typeArr;
 
 @end
 
@@ -58,6 +65,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.separatorStyle = UITableViewCellStyleDefault;
+    [tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellIdentifier];
+    [tableView registerClass:[TypeCell class] forCellReuseIdentifier:TypeCellIdentifier];
     [tableView registerClass:[PostCell class] forCellReuseIdentifier:PostCellIdentifier];
     [tableView registerClass:[MonoGraphicCell class] forCellReuseIdentifier:MonoGraphicCellIdentifier];
     [tableView registerClass:[NewFlashCell class] forCellReuseIdentifier:NewFlashCellIdentifier];
@@ -105,120 +114,119 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
    
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(3);
-    
-    NSMutableArray *itemsArr = [NSMutableArray array];
-    
-    NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
-    [parametersDic setValue:@59 forKey:@"feed_id"];
-    [parametersDic setValue:@20 forKey:@"per_page"];
-    if (bid != 0) {
-        [parametersDic setValue:@(bid) forKey:@"b_id"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    if (!isTop) {
+        semaphore = dispatch_semaphore_create(1);
     }
-    
-    if (isTop) {
-        self.dataArr = [NSMutableArray array];
-    }
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     __weak typeof(self) weakSelf = self;
-    [manager GET:AKStreamUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
+    dispatch_group_async(group, queue, ^{
+        NSMutableArray *itemsArr = [NSMutableArray array];
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        __strong typeof(weakSelf) strongSelf = self;
-        NSDictionary *dict = [(NSDictionary *)responseObject valueForKey:@"data"];
-        NSArray *responseArr = [dict valueForKey:@"items"];
-        
-        NSLog(@"responseArr.count: %lu", responseArr.count);
-        
-        for (int i = 0; i < responseArr.count; i++) {
-            NSDictionary *dict = responseArr[i];
-            StreamModel *model = [StreamModel modelWithDictionary:dict];
-            [itemsArr addObject:model];
+        NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
+        [parametersDic setValue:@59 forKey:@"feed_id"];
+        [parametersDic setValue:@20 forKey:@"per_page"];
+        if (bid != 0) {
+            [parametersDic setValue:@(bid) forKey:@"b_id"];
         }
         
-        [strongSelf.dataArr addObjectsFromArray:itemsArr];
-        
-        dispatch_semaphore_signal(semaphore);
-        
-//        [strongSelf.tableView reloadData];
-//
-//        if ([strongSelf.tableView.mj_header isRefreshing]) {
-//            [strongSelf.tableView.mj_header endRefreshing];
-//        }
-//
-//        if ([strongSelf.tableView.mj_footer isRefreshing]) {
-//            [strongSelf.tableView.mj_footer endRefreshing];
-//        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error: %@", error);
-        
-        [SVProgressHUD showWithStatus:@"网络状况不佳"];
-        
-        dispatch_semaphore_signal(semaphore);
-        
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        if ([strongSelf.tableView.mj_header isRefreshing]) {
-//            [strongSelf.tableView.mj_header endRefreshing];
-//        }
-//
-//        if ([strongSelf.tableView.mj_footer isRefreshing]) {
-//            [strongSelf.tableView.mj_footer endRefreshing];
-//        }
-    }];
+        if (isTop) {
+            self.dataArr = [NSMutableArray array];
+        }
     
-    if (isTop) {
-        [parametersDic removeAllObjects];
-        [parametersDic setValue:@59 forKey:@"feed_id"];
-        [parametersDic setValue:@"feed" forKey:@"type"];
-        
-        __weak typeof(self) weakSelf = self;
-        [manager GET:AKFocusUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
+        [manager GET:AKStreamUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
-            for (int i = 0; i < itemsArr.count; i++) {
-                NSDictionary *dict = itemsArr[i];
-                FeedModel *model = [FeedModel modelWithDictionary:dict];
-                if (strongSelf.feedArr == nil) {
-                    strongSelf.feedArr = [NSMutableArray array];
-                }
-                
-                [strongSelf.feedArr addObject:model];
+            __strong typeof(weakSelf) strongSelf = self;
+            NSDictionary *dict = [(NSDictionary *)responseObject valueForKey:@"data"];
+            NSArray *responseArr = [dict valueForKey:@"items"];
+            
+            NSLog(@"responseArr.count: %lu", responseArr.count);
+            
+            for (int i = 0; i < responseArr.count; i++) {
+                NSDictionary *dict = responseArr[i];
+                StreamModel *model = [StreamModel modelWithDictionary:dict];
+                [itemsArr addObject:model];
             }
+            
+            [strongSelf.dataArr addObjectsFromArray:itemsArr];
             
             dispatch_semaphore_signal(semaphore);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error: %@", error);
+            
             [SVProgressHUD showWithStatus:@"网络状况不佳"];
             
             dispatch_semaphore_signal(semaphore);
         }];
+    });
+    
+    if (isTop) {
+        dispatch_group_async(group, queue, ^{
+            __weak typeof(self) weakSelf = self;
+            [manager GET:AKFeedUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                strongSelf.feedArr = [NSMutableArray array];
+                
+                NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
+                for (int i = 0; i < itemsArr.count; i++) {
+                    NSDictionary *dict = itemsArr[i];
+                    FeedModel *model = [FeedModel modelWithDictionary:dict];
+                    [strongSelf.feedArr addObject:model];
+                }
+                
+                dispatch_semaphore_signal(semaphore);
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [SVProgressHUD showWithStatus:@"网络状况不佳"];
+                
+                dispatch_semaphore_signal(semaphore);
+            }];
+        });
         
-        
-        [parametersDic removeAllObjects];
-        [parametersDic setValue:@59 forKey:@"feed_id"];
-        [parametersDic setValue:@"feed_second_level" forKey:@"type"];
-        
-        [manager GET:AKFocusUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-        }];
+        dispatch_group_async(group, queue, ^{
+            [manager GET:AKFeedSecond parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
+                strongSelf.typeArr = [NSMutableArray array];
+                for (int i = 0; i < itemsArr.count; i++) {
+                    NSDictionary *dict = itemsArr[i];
+                    TypeModel *model = [TypeModel modelWithDictionary:dict];
+                    [strongSelf.typeArr addObject:model];
+                }
+                
+                dispatch_semaphore_signal(semaphore);
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                dispatch_semaphore_signal(semaphore);
+            }];
+        });
     }
     
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    
-    [self.tableView reloadData];
-    
-    if ([self.tableView.mj_header isRefreshing]) {
-        [self.tableView.mj_header endRefreshing];
-    }
-    
-    if ([self.tableView.mj_footer isRefreshing]) {
-        [self.tableView.mj_footer endRefreshing];
-    }
+    dispatch_group_notify(group, queue, ^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        if (isTop) {
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        }
+        
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [strongSelf.tableView reloadData];
+        });
+        
+        if ([strongSelf.tableView.mj_header isRefreshing]) {
+            [strongSelf.tableView.mj_header endRefreshing];
+        }
+        
+        if ([strongSelf.tableView.mj_footer isRefreshing]) {
+            [strongSelf.tableView.mj_footer endRefreshing];
+        }
+    });
 }
 
 #pragma mark - UITableViewDataSource
@@ -228,19 +236,25 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArr.count;
+    return self.dataArr.count + 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StreamModel *model = [self.dataArr objectAtIndex:indexPath.row];
-    if ([model.entityType isEqualToString:@"post"] || [model.entityType isEqualToString:@"audio"] || [model.entityType isEqualToString:@"video"]) {
-        return 140.0;
-    } else if ([model.entityType isEqualToString:@"monographic"]) {
-        return 200.0;
-    } else if ([model.entityType isEqualToString:@"newsflash"]) {
-        return 100.0;
+    if (indexPath.row == 0) {
+        return 0.56 * AKScreenWidth;
+    } else if (indexPath.row == 1) {
+        return 81;
     } else {
-        return 210.0;
+        StreamModel *model = [self.dataArr objectAtIndex:indexPath.row - 2];
+        if ([model.entityType isEqualToString:@"post"] || [model.entityType isEqualToString:@"audio"] || [model.entityType isEqualToString:@"video"]) {
+            return 140.0;
+        } else if ([model.entityType isEqualToString:@"monographic"]) {
+            return 320.0;
+        } else if ([model.entityType isEqualToString:@"newsflash"]) {
+            return 100.0;
+        } else {
+            return 210.0;
+        }
     }
 }
 
@@ -263,39 +277,55 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StreamModel *model = self.dataArr[indexPath.row];
-    if ([model.entityType isEqualToString:@"post"] || [model.entityType isEqualToString:@"audio"] || [model.entityType isEqualToString:@"video"]) {
-        PostCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        FeedCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
-            cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PostCellIdentifier];
+            cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FeedCellIdentifier];
         }
-        
-        cell.streamModel = self.dataArr[indexPath.row];
-        
+        cell.feedArr = self.feedArr;
         return cell;
-    } else if ([model.entityType isEqualToString:@"monographic"]) {
-        MonoGraphicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    } else if (indexPath.row == 1) {
+        TypeCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
-            cell = [[MonoGraphicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MonoGraphicCellIdentifier];
+            cell = [[TypeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TypeCellIdentifier];
         }
-        cell.streamModel = model;
-        return cell;
-    } else if ([model.entityType isEqualToString:@"album"]) {
-        AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ThemeCellIdentifier];
-        }
-        
-        cell.streamModel = model;
+        cell.typeArr = self.typeArr;
         return cell;
     } else {
-        NewFlashCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[NewFlashCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NewFlashCellIdentifier];
+        StreamModel *model = self.dataArr[indexPath.row - 2];
+        if ([model.entityType isEqualToString:@"post"] || [model.entityType isEqualToString:@"audio"] || [model.entityType isEqualToString:@"video"]) {
+            PostCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PostCellIdentifier];
+            }
+            
+            cell.streamModel = model;
+            
+            return cell;
+        } else if ([model.entityType isEqualToString:@"monographic"]) {
+            MonoGraphicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[MonoGraphicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MonoGraphicCellIdentifier];
+            }
+            cell.streamModel = model;
+            return cell;
+        } else if ([model.entityType isEqualToString:@"album"]) {
+            AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ThemeCellIdentifier];
+            }
+            
+            cell.streamModel = model;
+            return cell;
+        } else {
+            NewFlashCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[NewFlashCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NewFlashCellIdentifier];
+            }
+            
+            cell.streamModel = model;
+            return cell;
         }
-        
-        cell.streamModel = model;
-        return cell;
     }
 }
 

@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *cover;
 
-@property (nonatomic, strong) UIImage *coverImage;
+@property (nonatomic, strong) NSArray *coverArr;
 
 + (instancetype)modelWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

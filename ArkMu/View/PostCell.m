@@ -10,6 +10,7 @@
 
 #import "Masonry.h"
 #import "Common.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "StreamModel.h"
 #import "ColumnModel.h"
@@ -94,16 +95,26 @@
 - (void)setStreamModel:(StreamModel *)streamModel {
     _streamModel = streamModel;
     
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    
+    self.titleLabel.text = streamModel.title;
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 8 - 112, 140) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0]} context:NULL];
+        
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineBreakMode = NSLineBreakByCharWrapping;
+        paragraph.alignment = NSTextAlignmentLeft;
+        paragraph.lineSpacing = 6;
+        paragraph.firstLineHeadIndent = 0.0;
+        paragraph.paragraphSpacingBefore = 0.0;
+        paragraph.headIndent = 0.0;
+        paragraph.tailIndent = 0.0;
+        NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
+        
+        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(AKScreenWidth - 112 - 28 - 8, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            strongSelf.titleLabel.text = streamModel.title;
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(rect.size.height);
+                make.height.mas_equalTo( rect.size.height);
             }];
         });
     });
@@ -111,42 +122,18 @@
     _descLabel.text = streamModel.columnModel.name;
     _favouriteLabel.text = [NSString stringWithFormat:@"%ld 喜欢", streamModel.favouriteNum];
     
-
-    if (streamModel.imgsArr.count > 0 && ![streamModel.imgsArr.firstObject isKindOfClass:[UIImage class]]) {
-        __weak typeof(self) weakSelf = self;
-        __block StreamModel *blockModel = streamModel;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:streamModel.imgsArr.firstObject]];
-            UIImage *img = [UIImage imageWithData:data];
-            UIGraphicsBeginImageContextWithOptions(img.size, NO, 0);
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, img.size.width, img.size.height) cornerRadius:12];
-            [path addClip];
-            [img drawAtPoint:CGPointZero];
-            UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                strongSelf.imgView.image = clipImage;
-                blockModel.imgsArr = [NSArray arrayWithObject:clipImage];
-                strongSelf.streamModel = blockModel;
-            });
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:[streamModel.imgsArr firstObject]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
+        [path addClip];
+        [image drawAtPoint:CGPointZero];
+        UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf.imgView.image = clipImage;
         });
-    } else {
-        self.imgView.image = streamModel.imgsArr.firstObject;
-    }
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    }];
 }
 
 @end

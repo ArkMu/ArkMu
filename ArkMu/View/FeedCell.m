@@ -12,6 +12,7 @@
 
 #import "Common.h"
 #import <Masonry.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface FeedCell () <UIScrollViewDelegate>
 
@@ -34,11 +35,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    UIScrollView *scrolleView = [[UIScrollView alloc] init];
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    
+    UIScrollView *scrolleView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 0.56 * frame.size.width)];
     [self addSubview:scrolleView];
     scrolleView.delegate = self;
     scrolleView.pagingEnabled = YES;
     scrolleView.showsHorizontalScrollIndicator = NO;
+    scrolleView.contentSize = CGSizeMake(frame.size.width * 3, 0.56 * frame.size.width);
     _scrollView = scrolleView;
     
     UILabel *commentLabel = [[UILabel alloc] init];
@@ -68,45 +72,22 @@
         make.bottom.mas_equalTo(commentLabel.mas_top);
     }];
     
-    [scrolleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(self);
-        make.size.mas_equalTo(self);
-    }];
-    
-    UIView *containerView = [[UIView alloc] init];
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3 * AKScreenWidth, 0.56 * AKScreenWidth)];
     [scrolleView addSubview:containerView];
-    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(scrolleView);
-        make.size.mas_equalTo(scrolleView);
-    }];
     
-    UIImageView *leftImageView = [[UIImageView alloc] init];
-    UIImageView *centerImageView = [[UIImageView alloc] init];
-    UIImageView *rightImageView = [[UIImageView alloc] init];
+    UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0 * AKScreenWidth, 0, AKScreenWidth, 0.56 * AKScreenWidth)];
+    UIImageView *centerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(1 * AKScreenWidth, 0, AKScreenWidth, 0.56 * AKScreenWidth)];
+    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2 * AKScreenWidth, 0, AKScreenWidth, 0.56 * AKScreenWidth)];
+    
+    _leftImgView = leftImageView;
+    _centerImgView = centerImageView;
+    _rightImgView = rightImageView;
     
     [containerView addSubview:leftImageView];
     [containerView addSubview:centerImageView];
     [containerView addSubview:rightImageView];
     
     centerImageView.userInteractionEnabled = YES;
-    
-    [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(containerView);
-        make.size.mas_equalTo(containerView);
-        make.trailing.mas_equalTo(containerView.mas_leading);
-    }];
-    
-    [centerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(containerView);
-        make.center.mas_equalTo(containerView);
-    }];
-    
-    [rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(containerView);
-        make.top.mas_equalTo(containerView);
-        make.leading.mas_equalTo(containerView.mas_trailing);
-    }];
-    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionForGestureOnCenterImageView)];
     [_centerImgView addGestureRecognizer:tap];
@@ -132,24 +113,13 @@
     _pageControl.numberOfPages = feedArr.count;
     _pageControl.currentPage = _currentIndex;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (int i = 0; i < feedArr.count; i++) {
-            FeedModel *model = feedArr[i];
-            if (model.coverImage == nil) {
-                NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.cover]];
-                UIImage *image = [UIImage imageWithData:imgData];
-                model.coverImage = image;
-            }
-        }
-    });
-    
-    
+    [self setImageViewForScrollView];
 }
 
 - (NSInteger)indexEnabled:(NSInteger)index {
     if (index < 0) {
         return _feedArr.count - 1;
-    } else if (index > _feedArr.count) {
+    } else if (index > _feedArr.count - 1) {
         return 0;
     } else {
         return index;
@@ -173,28 +143,20 @@
     
     NSInteger leftIndex = [self indexEnabled:_currentIndex - 1];
     FeedModel *leftModel = _feedArr[leftIndex];
-    _leftImgView.image = leftModel.coverImage;
+    [_leftImgView sd_setImageWithURL:[NSURL URLWithString:leftModel.cover]];
     
     NSInteger currentIndex = [self indexEnabled:_currentIndex];
     FeedModel *currentModel = _feedArr[currentIndex];
-    _centerImgView.image = currentModel.coverImage;
+    [_centerImgView sd_setImageWithURL:[NSURL URLWithString:currentModel.cover]];
+    _centerImgView.userInteractionEnabled = YES;
     
     NSInteger rightIndex = [self indexEnabled:_currentIndex + 1];
     FeedModel *rightModel = _feedArr[rightIndex];
-    _rightImgView.image = rightModel.coverImage;
+    [_rightImgView sd_setImageWithURL:[NSURL URLWithString:rightModel.cover]];
     
     _commentLabel.text = currentModel.title;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    
+    _scrollView.contentOffset = CGPointMake(AKScreenWidth, 0);
 }
 
 @end

@@ -11,7 +11,9 @@
 
 
 #define AKStreamUrl     @"https://36kr.com/lapi/app-front/feed-stream?"
-#define AKFocusUrl      @"https://36kr.com/lapi/app-front/focus?"
+
+#define AKFeedUrl       @"https://36kr.com/lapi/app-front/focus?feed_id=59&type=feed"
+#define AKFeedSecond      @"https://36kr.com/lapi/app-front/focus?feed_id=59&type=feed_second_level"
 
 #define AKColor(r, g, b, a) [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a]
 
@@ -26,5 +28,8 @@
 #define AKLightGray         [UIColor lightGrayColor]
 
 #define AKCustomFont(f)     [UIFont systemFontOfSize:f]
+
+#define AKScreenWidth       [[UIScreen mainScreen] bounds].size.width
+#define AKScreenHeight      [[UIScreen mainScreen] bounds].size.height
 
 #endif /* Common_h */
