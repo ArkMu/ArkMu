@@ -12,4 +12,5 @@ target 'ArkMu' do
   pod 'SDWebImage', '~> 4.0'
   pod 'ReactiveCocoa', '~> 2.4.0'
   pod 'MJRefresh'
+  pod 'SVProgressHUD'
 end

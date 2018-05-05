@@ -10,6 +10,7 @@
 
 #import "Common.h"
 #import "AFNetworking.h"
+#import "MJRefresh.h"
 
 #import "StreamModel.h"
 #import "PostCell.h"
@@ -57,6 +58,25 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
     _dataArr = [NSMutableArray array];
     
     [self arkMuLoadDataFromServerWithBId:0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager manager];
+    if (manager.reachable) {
+        __weak typeof(self) weakSelf = self;
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            NSInteger bid = 0;
+            if (strongSelf.dataArr.count > 0) {
+                StreamModel *model = (StreamModel *)strongSelf.dataArr.lastObject;
+                bid = model.streamId;
+            }
+            [strongSelf arkMuLoadDataFromServerWithBId:bid];
+        }];
+    } else {
+        
+    }
+    
 }
 
 - (void)arkMuLoadDataFromServerWithBId:(NSInteger)bid {
