@@ -11,11 +11,20 @@
 #import "Common.h"
 #import "AFNetworking.h"
 #import "MJRefresh.h"
+#import <SVProgressHUD.h>
+#import "Reachability.h"
 
 #import "StreamModel.h"
+
 #import "PostCell.h"
+#import "MonoGraphicCell.h"
+#import "NewFlashCell.h"
+#import "AlbumCell.h"
 
 static NSString *PostCellIdentifier = @"PostCellIdetifier";
+static NSString *MonoGraphicCellIdentifier = @"MonoGraphicCellIdentifier";
+static NSString *NewFlashCellIdentifier = @"NewFlashCellIdentifier";
+static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 
 @interface MessageVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -38,14 +47,18 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
     [super loadView];
     
     self.title = @"messageVC";
-    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = AKClearColor;
     
     CGRect frame = [[UIScreen mainScreen] bounds];
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, frame.size.width, frame.size.height - 64) style:UITableViewStyleGrouped];
+    tableView.backgroundColor = AKClearColor;
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.separatorStyle = UITableViewCellStyleDefault;
     [tableView registerClass:[PostCell class] forCellReuseIdentifier:PostCellIdentifier];
+    [tableView registerClass:[MonoGraphicCell class] forCellReuseIdentifier:MonoGraphicCellIdentifier];
+    [tableView registerClass:[NewFlashCell class] forCellReuseIdentifier:NewFlashCellIdentifier];
+    [tableView registerClass:[AlbumCell class] forCellReuseIdentifier:ThemeCellIdentifier];
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
@@ -57,12 +70,17 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
     _operationQueue.maxConcurrentOperationCount = 1;
     _dataArr = [NSMutableArray array];
     
-    [self arkMuLoadDataFromServerWithBId:0];
+    __weak typeof(self) weakSelf = self;
+    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf arkMuLoadDataFromServerWithBId:0 state:YES];
+    }];
+    [_tableView.mj_header beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager manager];
-    if (manager.reachable) {
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    if ([reach currentReachabilityStatus]) {
         __weak typeof(self) weakSelf = self;
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -71,27 +89,42 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
                 StreamModel *model = (StreamModel *)strongSelf.dataArr.lastObject;
                 bid = model.streamId;
             }
-            [strongSelf arkMuLoadDataFromServerWithBId:bid];
+            [strongSelf arkMuLoadDataFromServerWithBId:bid state:NO];
         }];
     } else {
+        [SVProgressHUD showWithStatus:@"网络状况不佳"];
         
+        if ([_tableView.mj_header isRefreshing]) {
+            [_tableView.mj_header endRefreshing];
+        }
     }
-    
 }
 
-- (void)arkMuLoadDataFromServerWithBId:(NSInteger)bid {
+- (void)arkMuLoadDataFromServerWithBId:(NSInteger)bid state:(BOOL)isTop {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     NSMutableArray *itemsArr = [NSMutableArray array];
     
-    NSMutableDictionary *parametersDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@59, @"feed_id", @20, @"per_page", nil];
+    NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
+    [parametersDic setValue:@59 forKey:@"feed_id"];
+    [parametersDic setValue:@20 forKey:@"per_page"];
     if (bid != 0) {
         [parametersDic setValue:@(bid) forKey:@"b_id"];
     }
     
+    if (isTop) {
+        self.dataArr = [NSMutableArray array];
+    }
+    
+    __weak typeof(self) weakSelf = self;
     [manager GET:AKStreamUrl parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray *responseArr = [[(NSDictionary *)responseObject valueForKey:@"data"] valueForKey:@"items"];
+        __strong typeof(weakSelf) strongSelf = self;
+        NSDictionary *dict = [(NSDictionary *)responseObject valueForKey:@"data"];
+        NSArray *responseArr = [dict valueForKey:@"items"];
+        
+        NSLog(@"responseArr.count: %lu", responseArr.count);
         
         for (int i = 0; i < responseArr.count; i++) {
             NSDictionary *dict = responseArr[i];
@@ -99,10 +132,29 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
             [itemsArr addObject:model];
         }
         
-        [self.dataArr addObjectsFromArray:itemsArr];
-        [self.tableView reloadData];
+        [strongSelf.dataArr addObjectsFromArray:itemsArr];
+        [strongSelf.tableView reloadData];
+        
+        if ([strongSelf.tableView.mj_header isRefreshing]) {
+            [strongSelf.tableView.mj_header endRefreshing];
+        }
+        
+        if ([strongSelf.tableView.mj_footer isRefreshing]) {
+            [strongSelf.tableView.mj_footer endRefreshing];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
+        
+        [SVProgressHUD showWithStatus:@"网络状况不佳"];
+        
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if ([strongSelf.tableView.mj_header isRefreshing]) {
+            [strongSelf.tableView.mj_header endRefreshing];
+        }
+        
+        if ([strongSelf.tableView.mj_footer isRefreshing]) {
+            [strongSelf.tableView.mj_footer endRefreshing];
+        }
     }];
 }
 
@@ -117,7 +169,16 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 140.0;
+    StreamModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    if ([model.entityType isEqualToString:@"post"] || [model.entityType isEqualToString:@"audio"] || [model.entityType isEqualToString:@"video"]) {
+        return 140.0;
+    } else if ([model.entityType isEqualToString:@"monographic"]) {
+        return 200.0;
+    } else if ([model.entityType isEqualToString:@"newsflash"]) {
+        return 100.0;
+    } else {
+        return 210.0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -139,14 +200,40 @@ static NSString *PostCellIdentifier = @"PostCellIdetifier";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PostCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PostCellIdentifier];
+    StreamModel *model = self.dataArr[indexPath.row];
+    if ([model.entityType isEqualToString:@"post"] || [model.entityType isEqualToString:@"audio"] || [model.entityType isEqualToString:@"video"]) {
+        PostCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PostCellIdentifier];
+        }
+        
+        cell.streamModel = self.dataArr[indexPath.row];
+        
+        return cell;
+    } else if ([model.entityType isEqualToString:@"monographic"]) {
+        MonoGraphicCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[MonoGraphicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MonoGraphicCellIdentifier];
+        }
+        cell.streamModel = model;
+        return cell;
+    } else if ([model.entityType isEqualToString:@"album"]) {
+        AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ThemeCellIdentifier];
+        }
+        
+        cell.streamModel = model;
+        return cell;
+    } else {
+        NewFlashCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[NewFlashCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NewFlashCellIdentifier];
+        }
+        
+        cell.streamModel = model;
+        return cell;
     }
-    
-    cell.streamModel = self.dataArr[indexPath.row];
-    
-    return cell;
 }
 
 #pragma mark - UITableViewDelegate

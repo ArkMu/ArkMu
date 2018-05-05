@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class EntityModel;
 @class ColumnModel;
 
 @interface StreamModel : NSObject
@@ -19,8 +20,10 @@
 @property (nonatomic, strong) NSString *templateType;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *imgsArr;
+@property (nonatomic, strong) NSArray *entityArr;
 @property (nonatomic, strong) ColumnModel *columnModel;
 @property (nonatomic, assign) NSInteger favouriteNum;
+@property (nonatomic, strong) NSString *publishedAtTime;
 
 + (instancetype)modelWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
