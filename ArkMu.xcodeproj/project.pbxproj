@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33345481209D4553005B2513 /* NewFlashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345480209D4553005B2513 /* NewFlashCell.m */; };
 		33345484209D4AAC005B2513 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345483209D4AAC005B2513 /* AlbumCell.m */; };
 		33345487209D4CFB005B2513 /* EntityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345486209D4CFB005B2513 /* EntityModel.m */; };
 		3334548A209D4D59005B2513 /* TemplateInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345489209D4D59005B2513 /* TemplateInfoModel.m */; };
@@ -22,17 +21,17 @@
 		3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3369FF34209BF3F100C395C6 /* LaunchScreen.storyboard */; };
 		3369FF39209BF3F100C395C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF38209BF3F100C395C6 /* main.m */; };
 		3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF75209C9ED500C395C6 /* MessageVC.m */; };
-		3369FF7A209CA1F400C395C6 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF79209CA1F400C395C6 /* PostCell.m */; };
 		3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF7F209CA3AA00C395C6 /* StreamModel.m */; };
 		3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF82209CA50900C395C6 /* ColumnModel.m */; };
 		33A4783B209D323B00EF8E3E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4783A209D323B00EF8E3E /* Reachability.m */; };
-		33A4783E209D3D0E00EF8E3E /* MonoGraphicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4783D209D3D0E00EF8E3E /* MonoGraphicCell.m */; };
+		33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165B209DEB86008A79C7 /* SmallImageCell.m */; };
+		33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165E209DEBE4008A79C7 /* BigImageCell.m */; };
+		33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C91661209DEC41008A79C7 /* NoImageCell.m */; };
+		33C91668209DF34A008A79C7 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C91667209DF34A008A79C7 /* WebViewVC.m */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3334547F209D4553005B2513 /* NewFlashCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFlashCell.h; sourceTree = "<group>"; };
-		33345480209D4553005B2513 /* NewFlashCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFlashCell.m; sourceTree = "<group>"; };
 		33345482209D4AAC005B2513 /* AlbumCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
 		33345483209D4AAC005B2513 /* AlbumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
 		33345485209D4CFB005B2513 /* EntityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityModel.h; sourceTree = "<group>"; };
@@ -60,16 +59,20 @@
 		3369FF74209C9ED500C395C6 /* MessageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageVC.h; sourceTree = "<group>"; };
 		3369FF75209C9ED500C395C6 /* MessageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageVC.m; sourceTree = "<group>"; };
 		3369FF77209C9F1D00C395C6 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		3369FF78209CA1F400C395C6 /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
-		3369FF79209CA1F400C395C6 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		3369FF7E209CA3AA00C395C6 /* StreamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamModel.h; sourceTree = "<group>"; };
 		3369FF7F209CA3AA00C395C6 /* StreamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamModel.m; sourceTree = "<group>"; };
 		3369FF81209CA50900C395C6 /* ColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnModel.h; sourceTree = "<group>"; };
 		3369FF82209CA50900C395C6 /* ColumnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColumnModel.m; sourceTree = "<group>"; };
 		33A47839209D323B00EF8E3E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		33A4783A209D323B00EF8E3E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		33A4783C209D3D0E00EF8E3E /* MonoGraphicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonoGraphicCell.h; sourceTree = "<group>"; };
-		33A4783D209D3D0E00EF8E3E /* MonoGraphicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonoGraphicCell.m; sourceTree = "<group>"; };
+		33C9165A209DEB86008A79C7 /* SmallImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmallImageCell.h; sourceTree = "<group>"; };
+		33C9165B209DEB86008A79C7 /* SmallImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmallImageCell.m; sourceTree = "<group>"; };
+		33C9165D209DEBE4008A79C7 /* BigImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigImageCell.h; sourceTree = "<group>"; };
+		33C9165E209DEBE4008A79C7 /* BigImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigImageCell.m; sourceTree = "<group>"; };
+		33C91660209DEC41008A79C7 /* NoImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoImageCell.h; sourceTree = "<group>"; };
+		33C91661209DEC41008A79C7 /* NoImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoImageCell.m; sourceTree = "<group>"; };
+		33C91666209DF34A008A79C7 /* WebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
+		33C91667209DF34A008A79C7 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 			children = (
 				3369FF74209C9ED500C395C6 /* MessageVC.h */,
 				3369FF75209C9ED500C395C6 /* MessageVC.m */,
+				33C91666209DF34A008A79C7 /* WebViewVC.h */,
+				33C91667209DF34A008A79C7 /* WebViewVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -151,12 +156,12 @@
 			isa = PBXGroup;
 			children = (
 				3369FF2F209BF3EF00C395C6 /* Main.storyboard */,
-				3369FF78209CA1F400C395C6 /* PostCell.h */,
-				3369FF79209CA1F400C395C6 /* PostCell.m */,
-				33A4783C209D3D0E00EF8E3E /* MonoGraphicCell.h */,
-				33A4783D209D3D0E00EF8E3E /* MonoGraphicCell.m */,
-				3334547F209D4553005B2513 /* NewFlashCell.h */,
-				33345480209D4553005B2513 /* NewFlashCell.m */,
+				33C9165A209DEB86008A79C7 /* SmallImageCell.h */,
+				33C9165B209DEB86008A79C7 /* SmallImageCell.m */,
+				33C9165D209DEBE4008A79C7 /* BigImageCell.h */,
+				33C9165E209DEBE4008A79C7 /* BigImageCell.m */,
+				33C91660209DEC41008A79C7 /* NoImageCell.h */,
+				33C91661209DEC41008A79C7 /* NoImageCell.m */,
 				33345482209D4AAC005B2513 /* AlbumCell.h */,
 				33345483209D4AAC005B2513 /* AlbumCell.m */,
 				33345491209D624A005B2513 /* AlbumView.h */,
@@ -337,21 +342,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				33345493209D624A005B2513 /* AlbumView.m in Sources */,
-				33345481209D4553005B2513 /* NewFlashCell.m in Sources */,
+				33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */,
 				3369FF39209BF3F100C395C6 /* main.m in Sources */,
 				3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */,
 				3334548A209D4D59005B2513 /* TemplateInfoModel.m in Sources */,
 				3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */,
 				333454A2209D7C5C005B2513 /* FeedCell.m in Sources */,
-				33A4783E209D3D0E00EF8E3E /* MonoGraphicCell.m in Sources */,
 				33A4783B209D323B00EF8E3E /* Reachability.m in Sources */,
 				3369FF2B209BF3EF00C395C6 /* AppDelegate.m in Sources */,
 				333454A5209D7C69005B2513 /* TypeCell.m in Sources */,
 				333454A8209D7CC1005B2513 /* FeedModel.m in Sources */,
 				33345487209D4CFB005B2513 /* EntityModel.m in Sources */,
 				3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */,
-				3369FF7A209CA1F400C395C6 /* PostCell.m in Sources */,
 				33345484209D4AAC005B2513 /* AlbumCell.m in Sources */,
+				33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */,
+				33C91668209DF34A008A79C7 /* WebViewVC.m in Sources */,
+				33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */,
 				33443CD0209D8D73001BF9E4 /* TypeModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  MonoGraphicCell.h
+//  SmallImageCell.h
 //  ArkMu
 //
 //  Created by Sky on 2018/5/5.
@@ -10,7 +10,7 @@
 
 @class StreamModel;
 
-@interface MonoGraphicCell : UITableViewCell
+@interface SmallImageCell : UITableViewCell
 
 @property (nonatomic, strong) StreamModel *streamModel;
 

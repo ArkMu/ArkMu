@@ -1,8 +1,8 @@
 //
-//  PostCell.h
+//  NoImageCell.h
 //  ArkMu
 //
-//  Created by Sky on 2018/5/4.
+//  Created by Sky on 2018/5/5.
 //  Copyright © 2018年 Sky. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @class StreamModel;
 
-@interface PostCell : UITableViewCell
+@interface NoImageCell : UITableViewCell
 
 @property (nonatomic, strong) StreamModel *streamModel;
 

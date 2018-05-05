@@ -1,5 +1,5 @@
 //
-//  NewFlashCell.h
+//  BigImageCell.h
 //  ArkMu
 //
 //  Created by Sky on 2018/5/5.
@@ -10,7 +10,7 @@
 
 @class StreamModel;
 
-@interface NewFlashCell : UITableViewCell
+@interface BigImageCell : UITableViewCell
 
 @property (nonatomic, strong) StreamModel *streamModel;
 

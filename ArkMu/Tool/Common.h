@@ -32,4 +32,9 @@
 #define AKScreenWidth       [[UIScreen mainScreen] bounds].size.width
 #define AKScreenHeight      [[UIScreen mainScreen] bounds].size.height
 
+#define AKTemplateSmallImage    @"small_image"
+#define AKTemplateBigImage      @"big_image"
+#define AKTemplateNoImage       @"no_image"
+#define AKTemplateAlbum         @"album"
+
 #endif /* Common_h */

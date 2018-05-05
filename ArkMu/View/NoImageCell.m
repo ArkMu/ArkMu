@@ -1,19 +1,19 @@
 //
-//  NewFlashCell.m
+//  NoImageCell.m
 //  ArkMu
 //
 //  Created by Sky on 2018/5/5.
 //  Copyright © 2018年 Sky. All rights reserved.
 //
 
-#import "NewFlashCell.h"
+#import "NoImageCell.h"
 
 #import "Common.h"
 #import <Masonry.h>
 
 #import "StreamModel.h"
 
-@interface NewFlashCell ()
+@interface NoImageCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation NewFlashCell
+@implementation NoImageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -89,7 +89,16 @@
     CGRect frame = [[UIScreen mainScreen] bounds];
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: AKCustomFont(17)} context:nil];
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineBreakMode = NSLineBreakByCharWrapping;
+        paragraph.alignment = NSTextAlignmentLeft;
+        paragraph.lineSpacing = 8;
+        paragraph.firstLineHeadIndent = 0.0;
+        paragraph.paragraphSpacingBefore = 0.0;
+        paragraph.headIndent = 0.0;
+        paragraph.tailIndent = 0.0;
+        NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
+        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 10, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -99,17 +108,6 @@
     });
     
     _timeLabel.text = streamModel.publishedAtTime;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end
