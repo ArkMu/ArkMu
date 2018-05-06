@@ -33,6 +33,8 @@
 #import "VideoVC.h"
 #import "AudioVC.h"
 
+#import "ActivityVC.h"
+
 static NSString *FeedCellIdentifier = @"FeedCellIdentifier";
 static NSString *TypeCellIdentifier = @"TypeCellIdentifier";
 
@@ -41,7 +43,7 @@ static NSString *BigImageCellIdentifier = @"BigImageCellIdentifier";
 static NSString *NoImageCellIdentifier = @"NoImageCellIdentifier";
 static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 
-@interface MessageVC () <UITableViewDataSource, UITableViewDelegate>
+@interface MessageVC () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) UITableView *tableView;
@@ -62,9 +64,6 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 - (void)loadView {
     [super loadView];
     
-    self.title = @"messageVC";
-    self.view.backgroundColor = AKClearColor;
-    
     CGRect frame = [[UIScreen mainScreen] bounds];
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, frame.size.width, frame.size.height - 64) style:UITableViewStyleGrouped];
     tableView.backgroundColor = AKClearColor;
@@ -79,10 +78,23 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     [tableView registerClass:[AlbumCell class] forCellReuseIdentifier:ThemeCellIdentifier];
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    searchBar.placeholder = @"搜个关键词试试看?";
+    searchBar.delegate = self;
+    self.navigationItem.titleView = searchBar;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *loginItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"login"] style:UIBarButtonItemStylePlain target:self action:@selector(messageVCLoginItemAction:)];
+    loginItem.imageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    self.navigationItem.leftBarButtonItem = loginItem;
+    
+    UIBarButtonItem *activityItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"activity"] style:UIBarButtonItemStyleDone target:self action:@selector(messageVCActivityItemAction:)];
+    activityItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, -8);
+    self.navigationItem.rightBarButtonItem = activityItem;
     
     _dataArr = [NSMutableArray array];
     
@@ -115,6 +127,20 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
         }
     }
 }
+
+#pragma mark - UINavigationItemAction
+
+- (void)messageVCLoginItemAction:(UIBarButtonItem *)item {
+    
+}
+
+- (void)messageVCActivityItemAction:(UIBarButtonItem *)item {
+    ActivityVC *activityVC = [[ActivityVC alloc] init];
+    
+    [self.navigationController pushViewController:activityVC animated:NO];
+}
+
+#pragma mark - Custom Method
 
 - (void)arkMuLoadDataFromServerWithBId:(NSInteger)bid state:(BOOL)isTop {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -149,8 +175,6 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             NSDictionary *dict = [(NSDictionary *)responseObject valueForKey:@"data"];
             NSArray *responseArr = [dict valueForKey:@"items"];
             
-            NSLog(@"responseArr.count: %lu", responseArr.count);
-            
             for (int i = 0; i < responseArr.count; i++) {
                 NSDictionary *dict = responseArr[i];
                 EntityModel *model = [EntityModel modelWithDictionary:dict];
@@ -181,8 +205,10 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
                 NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
                 for (int i = 0; i < itemsArr.count; i++) {
                     NSDictionary *dict = itemsArr[i];
-                    FeedModel *model = [FeedModel modelWithDictionary:dict];
-                    [strongSelf.feedArr addObject:model];
+                    if ([[dict valueForKey:@"type"] isEqualToString:@"feed"]) {
+                        FeedModel *model = [FeedModel modelWithDictionary:dict];
+                        [strongSelf.feedArr addObject:model];
+                    }
                 }
                 
                 dispatch_semaphore_signal(semaphore);
@@ -367,6 +393,12 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     } else if ([entityModel.entityType isEqualToString:@"audio"]) {
         
     }
+}
+
+#pragma makr - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    
 }
 
 #pragma mark - Memory Management

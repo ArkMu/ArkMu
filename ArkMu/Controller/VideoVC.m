@@ -35,7 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(videoVCBackItemAction:)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(videoVCBackItemAction:)];
+    backItem.imageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
     self.navigationItem.leftBarButtonItem = backItem;
     
     [self videoVCLoadMessageFromNetwork];

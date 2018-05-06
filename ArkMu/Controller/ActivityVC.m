@@ -1,32 +1,32 @@
 //
-//  TypeInfoVC.m
+//  ActivityVC.m
 //  ArkMu
 //
 //  Created by Sky on 2018/5/6.
 //  Copyright © 2018年 Sky. All rights reserved.
 //
 
-#import "TypeInfoVC.h"
+#import "ActivityVC.h"
 
 #import "Common.h"
 #import "AFShareManager.h"
 #import <SVProgressHUD.h>
 
-#import "EntityModel.h"
-#import "SmallImageCell.h"
+#import "ActivityModel.h"
+#import "ActivityCell.h"
 
-#import "InfoVC.h"
+#import "WebViewVC.h"
 
-static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
+static NSString *ActivityCellIdentifier = @"ActivityCellIdentifier";
 
-@interface TypeInfoVC () <UITableViewDataSource, UITableViewDelegate>
+@interface ActivityVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *datasArr;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation TypeInfoVC
+@implementation ActivityVC
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
@@ -40,59 +40,62 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, AKScreenWidth, AKScreenHeight - 64) style:UITableViewStyleGrouped];
     tableView.dataSource = self;
     tableView.delegate = self;
-    [tableView registerClass:[SmallImageCell class] forCellReuseIdentifier:SmallImageCellIdentifier];
+    [tableView registerClass:[ActivityCell class] forCellReuseIdentifier:ActivityCellIdentifier];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     _tableView = tableView;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(typeInfoVCBackItemAction)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(activityVCBackItemAction:)];
     backItem.imageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
     self.navigationItem.leftBarButtonItem = backItem;
     
-    [self typeInfoVCLoadMessageFromNetwork];
+    self.navigationItem.title = @"活动中心";
+    
+    [self activityVCLoadMessageFromNetwork];
+    [SVProgressHUD show];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - UINavigationItemAction
 
-- (void)typeInfoVCBackItemAction {
-    [SVProgressHUD dismiss];
-    
+- (void)activityVCBackItemAction:(UIBarButtonItem *)item {
     [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark - Custom Method
 
-- (void)typeInfoVCLoadMessageFromNetwork {
-    [SVProgressHUD show];
-    
+- (void)activityVCLoadMessageFromNetwork {
     AFShareManager *manager = [AFShareManager shareManager];
     
-    NSDictionary *parameter = @{@"per_page": @20};
-    
-    [manager.sessionManager GET:AKAlbumEntityUrlWithEntityId(self.entityId) parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager.sessionManager GET:AKActivityUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject: %@", responseObject);
-        
-        NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
+        NSDictionary *dataDict = [responseObject valueForKey:@"data"];
+        NSArray *itemsArr = [dataDict valueForKey:@"items"];
         
         NSMutableArray *mArr = [NSMutableArray array];
         for (NSDictionary *dict in itemsArr) {
-            EntityModel *model = [EntityModel modelWithDictionary:dict];
+            ActivityModel *model = [ActivityModel modelWithDictionary:dict];
             [mArr addObject:model];
         }
         
         self.datasArr = mArr;
+        
         [self.tableView reloadData];
+        
         [SVProgressHUD dismiss];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
         
-        [SVProgressHUD showWithStatus:@"Message Load Failed!"];
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -114,10 +117,6 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
     return 0.0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 140.0;
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, AKScreenWidth, 0)];
     return label;
@@ -128,14 +127,19 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
     return label;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (AKScreenWidth - 28) / 800 * 450 + 21 + 28 + 8;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SmallImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    ActivityCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
     if (cell == nil) {
-        cell = [[SmallImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SmallImageCellIdentifier];
+        cell = [[ActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ActivityCellIdentifier];
     }
     
-    EntityModel *model = self.datasArr[indexPath.row];
-    cell.entityModel = model;
+    ActivityModel *model = self.datasArr[indexPath.row];
+    cell.activityModel = model;
     
     return cell;
 }
@@ -145,11 +149,10 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    EntityModel *model = self.datasArr[indexPath.row];
-    
-    InfoVC *infoVC = [[InfoVC alloc] init];
-    infoVC.infoId = model.entityId;
-    [self.navigationController pushViewController:infoVC animated:NO];
+    ActivityModel *model = self.datasArr[indexPath.row];
+    WebViewVC *webViewVC = [[WebViewVC alloc] init];
+    webViewVC.urlStr = model.url;
+    [self.navigationController pushViewController:webViewVC animated:NO];
 }
 
 #pragma mark - Memory Management

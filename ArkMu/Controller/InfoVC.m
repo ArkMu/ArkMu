@@ -47,7 +47,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(infoVCBackItemAction)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(infoVCBackItemAction)];
+    backItem.imageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
     self.navigationItem.leftBarButtonItem = backItem;
     
     _manager = [AFHTTPSessionManager manager];

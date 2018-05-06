@@ -19,6 +19,8 @@
 #define AKAlbumEntityUrlWithEntityId(entityId) [NSString stringWithFormat:@"https://36kr.com/lapi/album-entity/%lu", entityId]
 #define AKVideoUrlWithVideoId(videoId) [NSString stringWithFormat:@"https://36kr.com/lapi/video/%lu?read=1", videoId]
 
+#define AKActivityUrl   @"https://36kr.com/lapi/activity"
+
 #define AKColor(r, g, b, a) [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a]
 
 #define AK102Color          AKColor(102,102,102,1)
@@ -38,6 +40,8 @@
 
 #define AKScreenWidth       [[UIScreen mainScreen] bounds].size.width
 #define AKScreenHeight      [[UIScreen mainScreen] bounds].size.height
+
+#define AKScale             [[UIScreen mainScreen] scale]
 
 #define AKTemplateSmallImage    @"small_image"
 #define AKTemplateBigImage      @"big_image"

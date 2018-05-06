@@ -25,8 +25,11 @@
 
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) UIView *commentView;
 
 @property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -46,8 +49,9 @@
     _scrollView = scrolleView;
     
     UIView *commentView = [[UIView alloc] init];
-    commentView.backgroundColor = AKAlphaColor(0.5);
+    commentView.backgroundColor = AKClearColor;
     [self addSubview:commentView];
+    _commentView = commentView;
     
     UILabel *commentLabel = [[UILabel alloc] init];
     commentLabel.textColor = AKWhiteColor;
@@ -102,7 +106,16 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionForGestureOnCenterImageView)];
     [_centerImgView addGestureRecognizer:tap];
     
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(feedViewTimerAction) userInfo:nil repeats:YES];
+    
     return self;
+}
+
+- (void)feedViewTimerAction {
+    _currentIndex++;
+    _currentIndex = [self indexEnabled:_currentIndex];
+    
+    [self setImageViewForScrollViewWithAnimation:YES];
 }
 
 - (void)actionForGestureOnCenterImageView {
@@ -114,7 +127,7 @@
 
 - (void)updateImageState {
     _currentIndex = [self indexEnabled:_currentIndex++];
-    [self setImageViewForScrollView];
+    [self setImageViewForScrollViewWithAnimation:NO];
 }
 
 - (void)setFeedArr:(NSArray<FeedModel *> *)feedArr {
@@ -123,7 +136,11 @@
     _pageControl.numberOfPages = feedArr.count;
     _pageControl.currentPage = _currentIndex;
     
-    [self setImageViewForScrollView];
+    [self setImageViewForScrollViewWithAnimation:NO];
+    
+    if (feedArr.count) {
+        _commentView.backgroundColor = AKAlphaColor(0.5);
+    }
 }
 
 - (NSInteger)indexEnabled:(NSInteger)index {
@@ -136,6 +153,13 @@
     }
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [_timer invalidate];
+    _timer = nil;
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.x == 0) {
         _currentIndex--;
@@ -145,10 +169,12 @@
     
     _currentIndex = [self indexEnabled:_currentIndex];
     
-    [self setImageViewForScrollView];
+    [self setImageViewForScrollViewWithAnimation:NO];
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(feedViewTimerAction) userInfo:nil repeats:YES];
 }
 
-- (void)setImageViewForScrollView {
+- (void)setImageViewForScrollViewWithAnimation:(BOOL)animate {
     _pageControl.currentPage = _currentIndex;
     
     NSInteger leftIndex = [self indexEnabled:_currentIndex - 1];
@@ -166,7 +192,7 @@
     
     _commentLabel.text = currentModel.title;
     
-    _scrollView.contentOffset = CGPointMake(AKScreenWidth, 0);
+    [_scrollView setContentOffset:CGPointMake(AKScreenWidth, 0) animated:animate];
 }
 
 @end

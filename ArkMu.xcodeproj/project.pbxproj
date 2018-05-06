@@ -28,8 +28,6 @@
 		33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA5209E7E3100E39106 /* AudioVC.m */; };
 		33D53CA9209E7E3F00E39106 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA8209E7E3F00E39106 /* VideoVC.m */; };
 		33D53CB0209E827C00E39106 /* InfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CAF209E827C00E39106 /* InfoModel.m */; };
-		33D53CB4209E8A6900E39106 /* nav_btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CB2209E8A6900E39106 /* nav_btn_back.png */; };
-		33D53CB5209E8A6900E39106 /* nav_btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */; };
 		33D53CB8209E918100E39106 /* TypeInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CB7209E918100E39106 /* TypeInfoVC.m */; };
 		33D53CBC209E94E600E39106 /* EntityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CBB209E94E600E39106 /* EntityModel.m */; };
 		33D53CBF209E993D00E39106 /* AFShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CBE209E993D00E39106 /* AFShareManager.m */; };
@@ -39,6 +37,13 @@
 		33D53CD0209EC72800E39106 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D53CCF209EC72800E39106 /* AVFoundation.framework */; };
 		33D53CDB209EEA1A00E39106 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CD9209EEA1A00E39106 /* play.png */; };
 		33D53CDC209EEA1A00E39106 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CDA209EEA1A00E39106 /* pause.png */; };
+		33D53CE5209F2EA400E39106 /* ActivityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CE4209F2EA400E39106 /* ActivityVC.m */; };
+		33D53CE9209F2ECD00E39106 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CE8209F2ECD00E39106 /* ActivityCell.m */; };
+		33D53CEE209F2F0800E39106 /* ActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CED209F2F0800E39106 /* ActivityModel.m */; };
+		33D53CF0209F3ADA00E39106 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CEF209F3AD900E39106 /* back.png */; };
+		33D53CF3209F3B3100E39106 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF1209F3B3100E39106 /* activity.png */; };
+		33D53CF4209F3B3100E39106 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF2209F3B3100E39106 /* login.png */; };
+		33D53CF7209F426400E39106 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CF6209F426400E39106 /* WebViewVC.m */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
@@ -84,8 +89,6 @@
 		33D53CA8209E7E3F00E39106 /* VideoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoVC.m; sourceTree = "<group>"; };
 		33D53CAE209E827C00E39106 /* InfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoModel.h; sourceTree = "<group>"; };
 		33D53CAF209E827C00E39106 /* InfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoModel.m; sourceTree = "<group>"; };
-		33D53CB2209E8A6900E39106 /* nav_btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_btn_back.png; sourceTree = "<group>"; };
-		33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_btn_back@2x.png"; sourceTree = "<group>"; };
 		33D53CB6209E918100E39106 /* TypeInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeInfoVC.h; sourceTree = "<group>"; };
 		33D53CB7209E918100E39106 /* TypeInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeInfoVC.m; sourceTree = "<group>"; };
 		33D53CBA209E94E600E39106 /* EntityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityModel.h; sourceTree = "<group>"; };
@@ -101,6 +104,17 @@
 		33D53CCF209EC72800E39106 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		33D53CD9209EEA1A00E39106 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		33D53CDA209EEA1A00E39106 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		33D53CE3209F2EA400E39106 /* ActivityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityVC.h; sourceTree = "<group>"; };
+		33D53CE4209F2EA400E39106 /* ActivityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityVC.m; sourceTree = "<group>"; };
+		33D53CE7209F2ECD00E39106 /* ActivityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
+		33D53CE8209F2ECD00E39106 /* ActivityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		33D53CEC209F2F0800E39106 /* ActivityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityModel.h; sourceTree = "<group>"; };
+		33D53CED209F2F0800E39106 /* ActivityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityModel.m; sourceTree = "<group>"; };
+		33D53CEF209F3AD900E39106 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		33D53CF1209F3B3100E39106 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
+		33D53CF2209F3B3100E39106 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
+		33D53CF5209F426400E39106 /* WebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
+		33D53CF6209F426400E39106 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +199,10 @@
 				33D53CA8209E7E3F00E39106 /* VideoVC.m */,
 				33D53CB6209E918100E39106 /* TypeInfoVC.h */,
 				33D53CB7209E918100E39106 /* TypeInfoVC.m */,
+				33D53CE3209F2EA400E39106 /* ActivityVC.h */,
+				33D53CE4209F2EA400E39106 /* ActivityVC.m */,
+				33D53CF5209F426400E39106 /* WebViewVC.h */,
+				33D53CF6209F426400E39106 /* WebViewVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,6 +227,8 @@
 				333454A1209D7C5C005B2513 /* FeedCell.m */,
 				33D53CCC209EC6F600E39106 /* VideoView.h */,
 				33D53CCD209EC6F600E39106 /* VideoView.m */,
+				33D53CE7209F2ECD00E39106 /* ActivityCell.h */,
+				33D53CE8209F2ECD00E39106 /* ActivityCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +248,8 @@
 				33D53CC7209EC3DF00E39106 /* TagModel.m */,
 				33D53CAD209E7FA300E39106 /* SecondLevel */,
 				33D53CB9209E94AD00E39106 /* TypeModel */,
+				33D53CEC209F2F0800E39106 /* ActivityModel.h */,
+				33D53CED209F2F0800E39106 /* ActivityModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,10 +278,11 @@
 		33D53CB1209E8A3400E39106 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
-				33D53CB2209E8A6900E39106 /* nav_btn_back.png */,
-				33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */,
 				33D53CDA209EEA1A00E39106 /* pause.png */,
 				33D53CD9209EEA1A00E39106 /* play.png */,
+				33D53CEF209F3AD900E39106 /* back.png */,
+				33D53CF1209F3B3100E39106 /* activity.png */,
+				33D53CF2209F3B3100E39106 /* login.png */,
 			);
 			path = Materials;
 			sourceTree = "<group>";
@@ -344,10 +367,11 @@
 			files = (
 				3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */,
 				3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */,
+				33D53CF0209F3ADA00E39106 /* back.png in Resources */,
 				3369FF31209BF3EF00C395C6 /* Main.storyboard in Resources */,
 				33D53CDC209EEA1A00E39106 /* pause.png in Resources */,
-				33D53CB4209E8A6900E39106 /* nav_btn_back.png in Resources */,
-				33D53CB5209E8A6900E39106 /* nav_btn_back@2x.png in Resources */,
+				33D53CF4209F3B3100E39106 /* login.png in Resources */,
+				33D53CF3209F3B3100E39106 /* activity.png in Resources */,
 				33D53CDB209EEA1A00E39106 /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +443,7 @@
 				33D53CC2209EC2BA00E39106 /* VideoModel.m in Sources */,
 				33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */,
 				3369FF39209BF3F100C395C6 /* main.m in Sources */,
+				33D53CF7209F426400E39106 /* WebViewVC.m in Sources */,
 				3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */,
 				33D53CA9209E7E3F00E39106 /* VideoVC.m in Sources */,
 				33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */,
@@ -435,7 +460,10 @@
 				33345484209D4AAC005B2513 /* AlbumCell.m in Sources */,
 				33D53CBC209E94E600E39106 /* EntityModel.m in Sources */,
 				33D53CB0209E827C00E39106 /* InfoModel.m in Sources */,
+				33D53CEE209F2F0800E39106 /* ActivityModel.m in Sources */,
+				33D53CE9209F2ECD00E39106 /* ActivityCell.m in Sources */,
 				33D53CC8209EC3DF00E39106 /* TagModel.m in Sources */,
+				33D53CE5209F2EA400E39106 /* ActivityVC.m in Sources */,
 				33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */,
 				33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */,
 				33443CD0209D8D73001BF9E4 /* TypeModel.m in Sources */,
