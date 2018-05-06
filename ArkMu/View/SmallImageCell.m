@@ -15,6 +15,8 @@
 #import "StreamModel.h"
 #import "ColumnModel.h"
 
+#import "EntityModel.h"
+
 @interface SmallImageCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -91,6 +93,50 @@
     
     return self;
 }
+
+//- (void)setEntityModel:(EntityModel *)entityModel {
+//    _entityModel = entityModel;
+//
+//    self.titleLabel.text = entityModel.;
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//
+//        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+//        paragraph.lineBreakMode = NSLineBreakByCharWrapping;
+//        paragraph.alignment = NSTextAlignmentLeft;
+//        paragraph.lineSpacing = 6;
+//        paragraph.firstLineHeadIndent = 0.0;
+//        paragraph.paragraphSpacingBefore = 0.0;
+//        paragraph.headIndent = 0.0;
+//        paragraph.tailIndent = 0.0;
+//        NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
+//
+//        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(AKScreenWidth - 112 - 28 - 8, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+//
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.height.mas_equalTo( rect.size.height);
+//            }];
+//        });
+//    });
+//
+//    _descLabel.text = streamModel.columnModel.name;
+//    _favouriteLabel.text = [NSString stringWithFormat:@"%ld 喜欢", streamModel.favouriteNum];
+//
+//    [_imgView sd_setImageWithURL:[NSURL URLWithString:[streamModel.imgsArr firstObject]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//        UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+//        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
+//        [path addClip];
+//        [image drawAtPoint:CGPointZero];
+//        UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            strongSelf.imgView.image = clipImage;
+//        });
+//    }];
+//}
 
 - (void)setStreamModel:(StreamModel *)streamModel {
     _streamModel = streamModel;
