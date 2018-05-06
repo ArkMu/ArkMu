@@ -27,6 +27,7 @@
         self.templateType = [dict valueForKey:@"template"];
         self.title = [dict valueForKey:@"title"];
         self.imgsArr = [dict valueForKey:@"images"];
+        self.entityId = [[dict valueForKey:@"entity_id"] integerValue];
         self.entityArr = [NSArray array];
         NSArray *entityArr = [[dict valueForKey:@"extra"] valueForKey:@"entity_list"];
         if (![entityArr isKindOfClass:[NSNull class]]) {

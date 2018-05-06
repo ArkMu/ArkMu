@@ -27,7 +27,12 @@
 		33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165B209DEB86008A79C7 /* SmallImageCell.m */; };
 		33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165E209DEBE4008A79C7 /* BigImageCell.m */; };
 		33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C91661209DEC41008A79C7 /* NoImageCell.m */; };
-		33C91668209DF34A008A79C7 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C91667209DF34A008A79C7 /* WebViewVC.m */; };
+		33D53CA3209E7D1B00E39106 /* InfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA2209E7D1B00E39106 /* InfoVC.m */; };
+		33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA5209E7E3100E39106 /* AudioVC.m */; };
+		33D53CA9209E7E3F00E39106 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA8209E7E3F00E39106 /* VideoVC.m */; };
+		33D53CB0209E827C00E39106 /* InfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CAF209E827C00E39106 /* InfoModel.m */; };
+		33D53CB4209E8A6900E39106 /* nav_btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CB2209E8A6900E39106 /* nav_btn_back.png */; };
+		33D53CB5209E8A6900E39106 /* nav_btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
@@ -71,8 +76,16 @@
 		33C9165E209DEBE4008A79C7 /* BigImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigImageCell.m; sourceTree = "<group>"; };
 		33C91660209DEC41008A79C7 /* NoImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoImageCell.h; sourceTree = "<group>"; };
 		33C91661209DEC41008A79C7 /* NoImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoImageCell.m; sourceTree = "<group>"; };
-		33C91666209DF34A008A79C7 /* WebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
-		33C91667209DF34A008A79C7 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
+		33D53CA1209E7D1B00E39106 /* InfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoVC.h; sourceTree = "<group>"; };
+		33D53CA2209E7D1B00E39106 /* InfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoVC.m; sourceTree = "<group>"; };
+		33D53CA4209E7E3100E39106 /* AudioVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioVC.h; sourceTree = "<group>"; };
+		33D53CA5209E7E3100E39106 /* AudioVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioVC.m; sourceTree = "<group>"; };
+		33D53CA7209E7E3F00E39106 /* VideoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoVC.h; sourceTree = "<group>"; };
+		33D53CA8209E7E3F00E39106 /* VideoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoVC.m; sourceTree = "<group>"; };
+		33D53CAE209E827C00E39106 /* InfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoModel.h; sourceTree = "<group>"; };
+		33D53CAF209E827C00E39106 /* InfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoModel.m; sourceTree = "<group>"; };
+		33D53CB2209E8A6900E39106 /* nav_btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_btn_back.png; sourceTree = "<group>"; };
+		33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_btn_back@2x.png"; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +132,7 @@
 		3369FF28209BF3EF00C395C6 /* ArkMu */ = {
 			isa = PBXGroup;
 			children = (
+				33D53CB1209E8A3400E39106 /* Materials */,
 				33A47835209D31F000EF8E3E /* Tool */,
 				3369FF73209C9E3F00C395C6 /* Model */,
 				3369FF72209C9E3B00C395C6 /* View */,
@@ -146,8 +160,12 @@
 			children = (
 				3369FF74209C9ED500C395C6 /* MessageVC.h */,
 				3369FF75209C9ED500C395C6 /* MessageVC.m */,
-				33C91666209DF34A008A79C7 /* WebViewVC.h */,
-				33C91667209DF34A008A79C7 /* WebViewVC.m */,
+				33D53CA1209E7D1B00E39106 /* InfoVC.h */,
+				33D53CA2209E7D1B00E39106 /* InfoVC.m */,
+				33D53CA4209E7E3100E39106 /* AudioVC.h */,
+				33D53CA5209E7E3100E39106 /* AudioVC.m */,
+				33D53CA7209E7E3F00E39106 /* VideoVC.h */,
+				33D53CA8209E7E3F00E39106 /* VideoVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -189,6 +207,7 @@
 				333454A7209D7CC1005B2513 /* FeedModel.m */,
 				33443CCE209D8D73001BF9E4 /* TypeModel.h */,
 				33443CCF209D8D73001BF9E4 /* TypeModel.m */,
+				33D53CAD209E7FA300E39106 /* SecondLevel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +220,24 @@
 				33A4783A209D323B00EF8E3E /* Reachability.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		33D53CAD209E7FA300E39106 /* SecondLevel */ = {
+			isa = PBXGroup;
+			children = (
+				33D53CAE209E827C00E39106 /* InfoModel.h */,
+				33D53CAF209E827C00E39106 /* InfoModel.m */,
+			);
+			path = SecondLevel;
+			sourceTree = "<group>";
+		};
+		33D53CB1209E8A3400E39106 /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				33D53CB2209E8A6900E39106 /* nav_btn_back.png */,
+				33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */,
+			);
+			path = Materials;
 			sourceTree = "<group>";
 		};
 		4BA196282A37D35548A4755E /* Pods */ = {
@@ -275,6 +312,8 @@
 				3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */,
 				3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */,
 				3369FF31209BF3EF00C395C6 /* Main.storyboard in Resources */,
+				33D53CB4209E8A6900E39106 /* nav_btn_back.png in Resources */,
+				33D53CB5209E8A6900E39106 /* nav_btn_back@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +384,9 @@
 				33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */,
 				3369FF39209BF3F100C395C6 /* main.m in Sources */,
 				3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */,
+				33D53CA9209E7E3F00E39106 /* VideoVC.m in Sources */,
 				3334548A209D4D59005B2513 /* TemplateInfoModel.m in Sources */,
+				33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */,
 				3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */,
 				333454A2209D7C5C005B2513 /* FeedCell.m in Sources */,
 				33A4783B209D323B00EF8E3E /* Reachability.m in Sources */,
@@ -353,10 +394,11 @@
 				333454A5209D7C69005B2513 /* TypeCell.m in Sources */,
 				333454A8209D7CC1005B2513 /* FeedModel.m in Sources */,
 				33345487209D4CFB005B2513 /* EntityModel.m in Sources */,
+				33D53CA3209E7D1B00E39106 /* InfoVC.m in Sources */,
 				3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */,
 				33345484209D4AAC005B2513 /* AlbumCell.m in Sources */,
+				33D53CB0209E827C00E39106 /* InfoModel.m in Sources */,
 				33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */,
-				33C91668209DF34A008A79C7 /* WebViewVC.m in Sources */,
 				33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */,
 				33443CD0209D8D73001BF9E4 /* TypeModel.m in Sources */,
 			);

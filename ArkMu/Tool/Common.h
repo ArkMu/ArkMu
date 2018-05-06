@@ -15,6 +15,8 @@
 #define AKFeedUrl       @"https://36kr.com/lapi/app-front/focus?feed_id=59&type=feed"
 #define AKFeedSecond      @"https://36kr.com/lapi/app-front/focus?feed_id=59&type=feed_second_level"
 
+#define AKPostUrlWithInfoId(infoId)   [NSString stringWithFormat:@"https://36kr.com/lapi/post/%lu?read=1", infoId]
+
 #define AKColor(r, g, b, a) [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a]
 
 #define AK102Color          AKColor(102,102,102,1)

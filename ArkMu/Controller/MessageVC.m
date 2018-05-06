@@ -27,7 +27,7 @@
 #import "TypeModel.h"
 #import "TypeCell.h"
 
-#import "WebViewVC.h"
+#import "InfoVC.h"
 
 static NSString *FeedCellIdentifier = @"FeedCellIdentifier";
 static NSString *TypeCellIdentifier = @"TypeCellIdentifier";
@@ -335,11 +335,13 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-//    StreamModel *streamModel = self.dataArr[indexPath.row - 2];
-    WebViewVC *webViewVC = [[WebViewVC alloc] init];
-    webViewVC.urlStr = @"https://36kr.com/lapi/post/5132427?read=1";
-    [self.navigationController pushViewController:webViewVC animated:NO];
+ 
+    StreamModel *streamModel = self.dataArr[indexPath.row - 2];
+    if ([streamModel.entityType isEqualToString:@"post"]) {
+        InfoVC *infoVC = [[InfoVC alloc] init];
+        infoVC.infoId = streamModel.entityId;
+        [self.navigationController pushViewController:infoVC animated:NO];
+    }
 }
 
 #pragma mark - Memory Management

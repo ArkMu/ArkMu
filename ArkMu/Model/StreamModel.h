@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *imgsArr;
 @property (nonatomic, strong) NSArray *entityArr;
+@property (nonatomic, assign) NSInteger entityId;
 @property (nonatomic, strong) ColumnModel *columnModel;
 @property (nonatomic, assign) NSInteger favouriteNum;
 @property (nonatomic, strong) NSString *publishedAtTime;
