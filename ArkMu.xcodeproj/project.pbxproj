@@ -44,6 +44,15 @@
 		33D53CF3209F3B3100E39106 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF1209F3B3100E39106 /* activity.png */; };
 		33D53CF4209F3B3100E39106 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF2209F3B3100E39106 /* login.png */; };
 		33D53CF7209F426400E39106 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CF6209F426400E39106 /* WebViewVC.m */; };
+		33D53D01209F4DA800E39106 /* message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF8209F4DA600E39106 /* message@2x.png */; };
+		33D53D02209F4DA800E39106 /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF9209F4DA600E39106 /* forward@2x.png */; };
+		33D53D03209F4DA800E39106 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CFA209F4DA700E39106 /* share@2x.png */; };
+		33D53D04209F4DA800E39106 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CFB209F4DA700E39106 /* list@2x.png */; };
+		33D53D05209F4DA800E39106 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CFC209F4DA700E39106 /* pause@2x.png */; };
+		33D53D06209F4DA800E39106 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CFD209F4DA700E39106 /* play@2x.png */; };
+		33D53D07209F4DA800E39106 /* backward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CFE209F4DA700E39106 /* backward@2x.png */; };
+		33D53D08209F4DA800E39106 /* download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CFF209F4DA800E39106 /* download@2x.png */; };
+		33D53D09209F4DA800E39106 /* store@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53D00209F4DA800E39106 /* store@2x.png */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +124,15 @@
 		33D53CF2209F3B3100E39106 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		33D53CF5209F426400E39106 /* WebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
 		33D53CF6209F426400E39106 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
+		33D53CF8209F4DA600E39106 /* message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@2x.png"; sourceTree = "<group>"; };
+		33D53CF9209F4DA600E39106 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward@2x.png"; sourceTree = "<group>"; };
+		33D53CFA209F4DA700E39106 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		33D53CFB209F4DA700E39106 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
+		33D53CFC209F4DA700E39106 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		33D53CFD209F4DA700E39106 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		33D53CFE209F4DA700E39106 /* backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward@2x.png"; sourceTree = "<group>"; };
+		33D53CFF209F4DA800E39106 /* download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download@2x.png"; sourceTree = "<group>"; };
+		33D53D00209F4DA800E39106 /* store@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "store@2x.png"; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -278,6 +296,15 @@
 		33D53CB1209E8A3400E39106 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				33D53CFE209F4DA700E39106 /* backward@2x.png */,
+				33D53CFF209F4DA800E39106 /* download@2x.png */,
+				33D53CF9209F4DA600E39106 /* forward@2x.png */,
+				33D53CFB209F4DA700E39106 /* list@2x.png */,
+				33D53CF8209F4DA600E39106 /* message@2x.png */,
+				33D53CFC209F4DA700E39106 /* pause@2x.png */,
+				33D53CFD209F4DA700E39106 /* play@2x.png */,
+				33D53CFA209F4DA700E39106 /* share@2x.png */,
+				33D53D00209F4DA800E39106 /* store@2x.png */,
 				33D53CDA209EEA1A00E39106 /* pause.png */,
 				33D53CD9209EEA1A00E39106 /* play.png */,
 				33D53CEF209F3AD900E39106 /* back.png */,
@@ -365,14 +392,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D53D06209F4DA800E39106 /* play@2x.png in Resources */,
 				3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */,
+				33D53D01209F4DA800E39106 /* message@2x.png in Resources */,
+				33D53D09209F4DA800E39106 /* store@2x.png in Resources */,
 				3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */,
+				33D53D08209F4DA800E39106 /* download@2x.png in Resources */,
 				33D53CF0209F3ADA00E39106 /* back.png in Resources */,
+				33D53D04209F4DA800E39106 /* list@2x.png in Resources */,
 				3369FF31209BF3EF00C395C6 /* Main.storyboard in Resources */,
+				33D53D07209F4DA800E39106 /* backward@2x.png in Resources */,
 				33D53CDC209EEA1A00E39106 /* pause.png in Resources */,
+				33D53D05209F4DA800E39106 /* pause@2x.png in Resources */,
 				33D53CF4209F3B3100E39106 /* login.png in Resources */,
 				33D53CF3209F3B3100E39106 /* activity.png in Resources */,
+				33D53D02209F4DA800E39106 /* forward@2x.png in Resources */,
 				33D53CDB209EEA1A00E39106 /* play.png in Resources */,
+				33D53D03209F4DA800E39106 /* share@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

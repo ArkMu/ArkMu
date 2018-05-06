@@ -10,4 +10,6 @@
 
 @interface AudioVC : UIViewController
 
+@property (nonatomic, assign) NSInteger entityId;
+
 @end

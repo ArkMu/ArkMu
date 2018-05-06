@@ -8,16 +8,52 @@
 
 #import "AudioVC.h"
 
+#import "Common.h"
+#import "AFShareManager.h"
+
 @interface AudioVC ()
 
 @end
 
 @implementation AudioVC
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+#pragma mark - Controller Method
+
+- (void)loadView {
+    [super loadView];
+    
+    UIImageView *imgView = [[UIImageView alloc] init];
+    [self.view addSubview:imgView];
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.textColor = AKWhiteColor;
+    titleLabel.font = AKCustomFont(17.0);
+    [self.view addSubview:titleLabel];
+    
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(audioVCBackItemAction:)];
+    backItem.imageInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    self.navigationItem.leftBarButtonItem = backItem;
+    
+    
 }
+
+#pragma mark - UINavigationItemAction
+
+- (void)audioVCBackItemAction:(UIBarButtonItem *)item {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

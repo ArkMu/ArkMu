@@ -18,6 +18,7 @@
 #define AKPostUrlWithInfoId(infoId)   [NSString stringWithFormat:@"https://36kr.com/lapi/post/%lu?read=1", infoId]
 #define AKAlbumEntityUrlWithEntityId(entityId) [NSString stringWithFormat:@"https://36kr.com/lapi/album-entity/%lu", entityId]
 #define AKVideoUrlWithVideoId(videoId) [NSString stringWithFormat:@"https://36kr.com/lapi/video/%lu?read=1", videoId]
+#define AKAudioUrlWithAudioId(audioId) [NSString stringWithFormat:@"https://36kr.com/lapi/audio/%lu?read=1", audioId]
 
 #define AKActivityUrl   @"https://36kr.com/lapi/activity"
 

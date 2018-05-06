@@ -13,6 +13,7 @@
 @property (nonatomic, assign) NSInteger tempId;
 @property (nonatomic, assign) NSInteger entityId;
 @property (nonatomic, strong) NSString  *entityType;
+@property (nonatomic, assign) NSInteger columnId;
 @property (nonatomic, strong) NSString  *templateType;
 @property (nonatomic, strong) NSString  *templateTitle;
 @property (nonatomic, strong) NSString  *templateCover;

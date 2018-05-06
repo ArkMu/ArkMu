@@ -21,6 +21,7 @@
         self.tempId = [[dict valueForKey:@"id"] integerValue];
         self.entityId = [[dict valueForKey:@"entity_id"] integerValue];
         self.entityType = [dict valueForKey:@"entity_type"];
+        self.columnId = [[dict valueForKey:@"column_id"] integerValue];
         NSDictionary *templateDict = [dict valueForKey:@"template_info"];
         self.templateTitle = [templateDict valueForKey:@"template_title"];
         self.templateType = [templateDict valueForKey:@"template_type"];
