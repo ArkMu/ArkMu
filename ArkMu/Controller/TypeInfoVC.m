@@ -49,8 +49,21 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(typeInfoVCBackItemAction)];
+    self.navigationItem.leftBarButtonItem = backItem;
     
+    [self typeInfoVCLoadMessageFromNetwork];
 }
+
+#pragma mark - UINavigationItemAction
+
+- (void)typeInfoVCBackItemAction {
+    [SVProgressHUD dismiss];
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - Custom Method
 
 - (void)typeInfoVCLoadMessageFromNetwork {
     [SVProgressHUD show];
@@ -64,6 +77,16 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject: %@", responseObject);
         
+        NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
+        
+        NSMutableArray *mArr = [NSMutableArray array];
+        for (NSDictionary *dict in itemsArr) {
+            EntityModel *model = [EntityModel modelWithDictionary:dict];
+            [mArr addObject:model];
+        }
+        
+        self.datasArr = mArr;
+        [self.tableView reloadData];
         [SVProgressHUD dismiss];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
@@ -110,12 +133,17 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
         cell = [[SmallImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SmallImageCellIdentifier];
     }
     
+    EntityModel *model = self.datasArr[indexPath.row];
+    cell.entityModel = model;
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     EntityModel *model = self.datasArr[indexPath.row];
     
     InfoVC *infoVC = [[InfoVC alloc] init];

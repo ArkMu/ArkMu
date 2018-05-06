@@ -11,7 +11,7 @@
 #import "Common.h"
 #import <Masonry.h>
 
-#import "StreamModel.h"
+#import "EntityModel.h"
 
 @interface NoImageCell ()
 
@@ -82,10 +82,10 @@
     return self;
 }
 
-- (void)setStreamModel:(StreamModel *)streamModel {
-    _streamModel = streamModel;
+- (void)setEntityModel:(EntityModel *)entityModel {
+    _entityModel = entityModel;
     
-    _titleLabel.text = streamModel.title;
+    _titleLabel.text = entityModel.templateTitle;
     CGRect frame = [[UIScreen mainScreen] bounds];
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -98,7 +98,7 @@
         paragraph.headIndent = 0.0;
         paragraph.tailIndent = 0.0;
         NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
-        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 10, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+        CGRect rect = [entityModel.templateTitle boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 10, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -107,7 +107,7 @@
         });
     });
     
-    _timeLabel.text = streamModel.publishedAtTime;
+    _timeLabel.text = entityModel.publishedAt;
 }
 
 @end

@@ -45,12 +45,16 @@
     scrolleView.contentSize = CGSizeMake(frame.size.width * 3, 0.56 * frame.size.width);
     _scrollView = scrolleView;
     
+    UIView *commentView = [[UIView alloc] init];
+    commentView.backgroundColor = AKAlphaColor(0.5);
+    [self addSubview:commentView];
+    
     UILabel *commentLabel = [[UILabel alloc] init];
     commentLabel.textColor = AKWhiteColor;
-    commentLabel.backgroundColor = AKColor(0, 0, 0, 0.5);
+    commentLabel.backgroundColor = AKClearColor;
     commentLabel.textAlignment = NSTextAlignmentLeft;
     commentLabel.font = AKCustomFont(17);
-    [self addSubview:commentLabel];
+    [commentView addSubview:commentLabel];
     _commentLabel = commentLabel;
     
     UIPageControl *pageControl = [[UIPageControl alloc] init];
@@ -61,15 +65,21 @@
     [self addSubview:pageControl];
     _pageControl = pageControl;
     
+    [commentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.mas_equalTo(self);
+        make.height.mas_equalTo(30);
+    }];
+    
     [commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(14);
-        make.trailing.bottom.mas_equalTo(-14);
+        make.trailing.mas_equalTo(-14);
+        make.bottom.mas_equalTo(commentView);
         make.height.mas_equalTo(30);
     }];
     
     [pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.mas_equalTo(commentLabel);
-        make.bottom.mas_equalTo(commentLabel.mas_top);
+        make.leading.trailing.mas_equalTo(commentView);
+        make.bottom.mas_equalTo(commentView.mas_top);
     }];
     
     UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3 * AKScreenWidth, 0.56 * AKScreenWidth)];
@@ -98,7 +108,7 @@
 - (void)actionForGestureOnCenterImageView {
     if (_gotoWebView) {
         FeedModel *model = _feedArr[_currentIndex];
-        _gotoWebView(model.url);
+        _gotoWebView(model.entityId);
     }
 }
 

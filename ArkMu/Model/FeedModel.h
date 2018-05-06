@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) NSArray *coverArr;
 
+@property (nonatomic, assign) NSInteger entityId;
+
 + (instancetype)modelWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 

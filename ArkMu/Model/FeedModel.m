@@ -22,6 +22,9 @@
         self.url = [dict valueForKey:@"url"];
         self.cover = [dict valueForKey:@"cover"];
         self.coverArr = [NSArray array];
+        if (![[dict valueForKey:@"entity_id"] isKindOfClass:[NSNull class]]) {
+            self.entityId = [[dict valueForKey:@"entity_id"] integerValue];
+        }
     }
     
     return self;

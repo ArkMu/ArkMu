@@ -17,6 +17,7 @@
 
 #define AKPostUrlWithInfoId(infoId)   [NSString stringWithFormat:@"https://36kr.com/lapi/post/%lu?read=1", infoId]
 #define AKAlbumEntityUrlWithEntityId(entityId) [NSString stringWithFormat:@"https://36kr.com/lapi/album-entity/%lu", entityId]
+#define AKVideoUrlWithVideoId(videoId) [NSString stringWithFormat:@"https://36kr.com/lapi/video/%lu?read=1", videoId]
 
 #define AKColor(r, g, b, a) [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a]
 
@@ -28,7 +29,10 @@
 #define AKBlueColor         AKColor(72,118,255,1)
 #define AKLightBlueColor    AKColor(188,210,238,1)
 
+#define AKAlphaColor(a)     AKColor(0,0,0,a)
+
 #define AKLightGray         [UIColor lightGrayColor]
+#define AKRedColor          [UIColor redColor]
 
 #define AKCustomFont(f)     [UIFont systemFontOfSize:f]
 

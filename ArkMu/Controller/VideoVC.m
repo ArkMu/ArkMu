@@ -8,30 +8,73 @@
 
 #import "VideoVC.h"
 
+#import "Common.h"
+#import "AFShareManager.h"
+
+#import "VideoView.h"
+#import "VideoModel.h"
+
 @interface VideoVC ()
+
+@property (nonatomic, strong) VideoView *videoView;
 
 @end
 
 @implementation VideoVC
 
+#pragma mark - Controller Method
+
+- (void)loadView {
+    [super loadView];
+    
+    VideoView *videoView = [[VideoView alloc] initWithFrame:CGRectMake(0, 64, AKScreenWidth, 200)];
+    [self.view addSubview:videoView];
+    self.videoView = videoView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(videoVCBackItemAction:)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    
+    [self videoVCLoadMessageFromNetwork];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.videoView setPlayerNil];
+}
+
+#pragma mark - UINavigationItemAction
+
+- (void)videoVCBackItemAction:(UIBarButtonItem *)item {
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - Custom Method
+
+- (void)videoVCLoadMessageFromNetwork {
+    AFShareManager *manager = [AFShareManager shareManager];
+    [manager.sessionManager GET:AKVideoUrlWithVideoId(self.videoId) parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [responseObject valueForKey:@"data"];
+        
+        VideoModel *model = [VideoModel modelWithDictionary:dict];
+        [self.videoView loadVideoWithUrl:model.url];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error: %@", error);
+    }];
+}
+
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

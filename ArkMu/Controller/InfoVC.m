@@ -59,6 +59,8 @@
 #pragma mark - UINavigationItemAction
 
 - (void)infoVCBackItemAction {
+    [SVProgressHUD dismiss];
+    
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -71,7 +73,6 @@
         self.infoModel = [InfoModel modelWithDictionary:infoDict];
         
         [self infoVCLoadMessage];
-        [SVProgressHUD dismiss];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
         
@@ -92,6 +93,8 @@
 
     [_webView stringByEvaluatingJavaScriptFromString:js];
     [_webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - Memory Management

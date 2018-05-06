@@ -1,5 +1,5 @@
 //
-//  VideoVC.h
+//  VideoView.h
 //  ArkMu
 //
 //  Created by Sky on 2018/5/6.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VideoVC : UIViewController
+@interface VideoView : UIView
 
-@property (nonatomic, assign) NSInteger videoId;
+- (void)loadVideoWithUrl:(NSString *)videoUrl;
+
+- (void)setPlayerNil;
 
 @end

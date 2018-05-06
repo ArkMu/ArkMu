@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		33345484209D4AAC005B2513 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345483209D4AAC005B2513 /* AlbumCell.m */; };
-		33345487209D4CFB005B2513 /* EntityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345486209D4CFB005B2513 /* EntityModel.m */; };
-		3334548A209D4D59005B2513 /* TemplateInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345489209D4D59005B2513 /* TemplateInfoModel.m */; };
 		33345493209D624A005B2513 /* AlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345492209D624A005B2513 /* AlbumView.m */; };
 		333454A2209D7C5C005B2513 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333454A1209D7C5C005B2513 /* FeedCell.m */; };
 		333454A5209D7C69005B2513 /* TypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333454A4209D7C69005B2513 /* TypeCell.m */; };
@@ -21,7 +19,6 @@
 		3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3369FF34209BF3F100C395C6 /* LaunchScreen.storyboard */; };
 		3369FF39209BF3F100C395C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF38209BF3F100C395C6 /* main.m */; };
 		3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF75209C9ED500C395C6 /* MessageVC.m */; };
-		3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF7F209CA3AA00C395C6 /* StreamModel.m */; };
 		3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3369FF82209CA50900C395C6 /* ColumnModel.m */; };
 		33A4783B209D323B00EF8E3E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4783A209D323B00EF8E3E /* Reachability.m */; };
 		33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165B209DEB86008A79C7 /* SmallImageCell.m */; };
@@ -36,16 +33,18 @@
 		33D53CB8209E918100E39106 /* TypeInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CB7209E918100E39106 /* TypeInfoVC.m */; };
 		33D53CBC209E94E600E39106 /* EntityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CBB209E94E600E39106 /* EntityModel.m */; };
 		33D53CBF209E993D00E39106 /* AFShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CBE209E993D00E39106 /* AFShareManager.m */; };
+		33D53CC2209EC2BA00E39106 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CC1209EC2BA00E39106 /* VideoModel.m */; };
+		33D53CC8209EC3DF00E39106 /* TagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CC7209EC3DF00E39106 /* TagModel.m */; };
+		33D53CCE209EC6F600E39106 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CCD209EC6F600E39106 /* VideoView.m */; };
+		33D53CD0209EC72800E39106 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D53CCF209EC72800E39106 /* AVFoundation.framework */; };
+		33D53CDB209EEA1A00E39106 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CD9209EEA1A00E39106 /* play.png */; };
+		33D53CDC209EEA1A00E39106 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CDA209EEA1A00E39106 /* pause.png */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		33345482209D4AAC005B2513 /* AlbumCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
 		33345483209D4AAC005B2513 /* AlbumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
-		33345485209D4CFB005B2513 /* EntityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityModel.h; sourceTree = "<group>"; };
-		33345486209D4CFB005B2513 /* EntityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntityModel.m; sourceTree = "<group>"; };
-		33345488209D4D59005B2513 /* TemplateInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateInfoModel.h; sourceTree = "<group>"; };
-		33345489209D4D59005B2513 /* TemplateInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateInfoModel.m; sourceTree = "<group>"; };
 		33345491209D624A005B2513 /* AlbumView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumView.h; sourceTree = "<group>"; };
 		33345492209D624A005B2513 /* AlbumView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumView.m; sourceTree = "<group>"; };
 		333454A0209D7C5C005B2513 /* FeedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
@@ -67,8 +66,6 @@
 		3369FF74209C9ED500C395C6 /* MessageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageVC.h; sourceTree = "<group>"; };
 		3369FF75209C9ED500C395C6 /* MessageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageVC.m; sourceTree = "<group>"; };
 		3369FF77209C9F1D00C395C6 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		3369FF7E209CA3AA00C395C6 /* StreamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamModel.h; sourceTree = "<group>"; };
-		3369FF7F209CA3AA00C395C6 /* StreamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamModel.m; sourceTree = "<group>"; };
 		3369FF81209CA50900C395C6 /* ColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColumnModel.h; sourceTree = "<group>"; };
 		3369FF82209CA50900C395C6 /* ColumnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColumnModel.m; sourceTree = "<group>"; };
 		33A47839209D323B00EF8E3E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -95,6 +92,15 @@
 		33D53CBB209E94E600E39106 /* EntityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntityModel.m; sourceTree = "<group>"; };
 		33D53CBD209E993D00E39106 /* AFShareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFShareManager.h; sourceTree = "<group>"; };
 		33D53CBE209E993D00E39106 /* AFShareManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFShareManager.m; sourceTree = "<group>"; };
+		33D53CC0209EC2BA00E39106 /* VideoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
+		33D53CC1209EC2BA00E39106 /* VideoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
+		33D53CC6209EC3DF00E39106 /* TagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagModel.h; sourceTree = "<group>"; };
+		33D53CC7209EC3DF00E39106 /* TagModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagModel.m; sourceTree = "<group>"; };
+		33D53CCC209EC6F600E39106 /* VideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
+		33D53CCD209EC6F600E39106 /* VideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
+		33D53CCF209EC72800E39106 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		33D53CD9209EEA1A00E39106 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		33D53CDA209EEA1A00E39106 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D53CD0209EC72800E39106 /* AVFoundation.framework in Frameworks */,
 				43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +122,7 @@
 		0EA2DD62714BE45D5BC6574E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33D53CCF209EC72800E39106 /* AVFoundation.framework */,
 				56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */,
 			);
 			name = Frameworks;
@@ -199,6 +207,8 @@
 				333454A4209D7C69005B2513 /* TypeCell.m */,
 				333454A0209D7C5C005B2513 /* FeedCell.h */,
 				333454A1209D7C5C005B2513 /* FeedCell.m */,
+				33D53CCC209EC6F600E39106 /* VideoView.h */,
+				33D53CCD209EC6F600E39106 /* VideoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,18 +216,16 @@
 		3369FF73209C9E3F00C395C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3369FF7E209CA3AA00C395C6 /* StreamModel.h */,
-				3369FF7F209CA3AA00C395C6 /* StreamModel.m */,
-				33345485209D4CFB005B2513 /* EntityModel.h */,
-				33345486209D4CFB005B2513 /* EntityModel.m */,
-				33345488209D4D59005B2513 /* TemplateInfoModel.h */,
-				33345489209D4D59005B2513 /* TemplateInfoModel.m */,
 				3369FF81209CA50900C395C6 /* ColumnModel.h */,
 				3369FF82209CA50900C395C6 /* ColumnModel.m */,
 				333454A6209D7CC1005B2513 /* FeedModel.h */,
 				333454A7209D7CC1005B2513 /* FeedModel.m */,
 				33443CCE209D8D73001BF9E4 /* TypeModel.h */,
 				33443CCF209D8D73001BF9E4 /* TypeModel.m */,
+				33D53CC0209EC2BA00E39106 /* VideoModel.h */,
+				33D53CC1209EC2BA00E39106 /* VideoModel.m */,
+				33D53CC6209EC3DF00E39106 /* TagModel.h */,
+				33D53CC7209EC3DF00E39106 /* TagModel.m */,
 				33D53CAD209E7FA300E39106 /* SecondLevel */,
 				33D53CB9209E94AD00E39106 /* TypeModel */,
 			);
@@ -250,6 +258,8 @@
 			children = (
 				33D53CB2209E8A6900E39106 /* nav_btn_back.png */,
 				33D53CB3209E8A6900E39106 /* nav_btn_back@2x.png */,
+				33D53CDA209EEA1A00E39106 /* pause.png */,
+				33D53CD9209EEA1A00E39106 /* play.png */,
 			);
 			path = Materials;
 			sourceTree = "<group>";
@@ -335,8 +345,10 @@
 				3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */,
 				3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */,
 				3369FF31209BF3EF00C395C6 /* Main.storyboard in Resources */,
+				33D53CDC209EEA1A00E39106 /* pause.png in Resources */,
 				33D53CB4209E8A6900E39106 /* nav_btn_back.png in Resources */,
 				33D53CB5209E8A6900E39106 /* nav_btn_back@2x.png in Resources */,
+				33D53CDB209EEA1A00E39106 /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,13 +416,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				33345493209D624A005B2513 /* AlbumView.m in Sources */,
+				33D53CC2209EC2BA00E39106 /* VideoModel.m in Sources */,
 				33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */,
 				3369FF39209BF3F100C395C6 /* main.m in Sources */,
 				3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */,
 				33D53CA9209E7E3F00E39106 /* VideoVC.m in Sources */,
-				3334548A209D4D59005B2513 /* TemplateInfoModel.m in Sources */,
 				33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */,
-				3369FF80209CA3AA00C395C6 /* StreamModel.m in Sources */,
 				33D53CBF209E993D00E39106 /* AFShareManager.m in Sources */,
 				33D53CB8209E918100E39106 /* TypeInfoVC.m in Sources */,
 				333454A2209D7C5C005B2513 /* FeedCell.m in Sources */,
@@ -418,12 +429,13 @@
 				3369FF2B209BF3EF00C395C6 /* AppDelegate.m in Sources */,
 				333454A5209D7C69005B2513 /* TypeCell.m in Sources */,
 				333454A8209D7CC1005B2513 /* FeedModel.m in Sources */,
-				33345487209D4CFB005B2513 /* EntityModel.m in Sources */,
 				33D53CA3209E7D1B00E39106 /* InfoVC.m in Sources */,
 				3369FF76209C9ED500C395C6 /* MessageVC.m in Sources */,
+				33D53CCE209EC6F600E39106 /* VideoView.m in Sources */,
 				33345484209D4AAC005B2513 /* AlbumCell.m in Sources */,
 				33D53CBC209E94E600E39106 /* EntityModel.m in Sources */,
 				33D53CB0209E827C00E39106 /* InfoModel.m in Sources */,
+				33D53CC8209EC3DF00E39106 /* TagModel.m in Sources */,
 				33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */,
 				33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */,
 				33443CD0209D8D73001BF9E4 /* TypeModel.m in Sources */,

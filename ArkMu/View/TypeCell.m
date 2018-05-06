@@ -66,10 +66,10 @@
     titleLabel.text = model.title;
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(70 * index, 0, 70, 81);
+    btn.frame = CGRectMake(0, 0, 70, 81);
     btn.tag = 1000 + index;
     [btn addTarget:self action:@selector(actionForButtonWithSender:) forControlEvents:UIControlEventTouchUpInside];
-    btn.backgroundColor = AKClearColor;
+    btn.backgroundColor = AKClearColor; 
     [view addSubview:btn];
     
     return view;
@@ -79,7 +79,7 @@
     if (_gotoWebView) {
         NSInteger index = sender.tag - 1000;
         TypeModel *model = self.typeArr[index];
-        _gotoWebView(model.url);
+        _gotoWebView(model.entityId);
     }
 }
 

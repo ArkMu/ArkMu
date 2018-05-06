@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class StreamModel;
+@class EntityModel;
 
 @interface BigImageCell : UITableViewCell
 
-@property (nonatomic, strong) StreamModel *streamModel;
+@property (nonatomic, strong) EntityModel *entityModel;
 
 @end

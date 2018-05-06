@@ -26,7 +26,7 @@
     _window.rootViewController = nav;
     [_window makeKeyAndVisible];
     
-    [[UINavigationBar appearance] setTintColor:AKBlackColor];
+    [[UINavigationBar appearance] setTintColor:AKAlphaColor(0.6)];
     [[UINavigationBar appearance] setBarTintColor:AKWhiteColor];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
     

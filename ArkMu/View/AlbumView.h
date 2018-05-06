@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class TemplateInfoModel;
 
 @interface AlbumView : UIView
 
-@property (nonatomic, strong) TemplateInfoModel *templateInfoModel;
 
 @end

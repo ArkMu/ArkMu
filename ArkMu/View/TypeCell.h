@@ -14,6 +14,6 @@
 
 @property (nonatomic, strong) NSArray <TypeModel *> *typeArr;
 
-@property (nonatomic, copy) void (^gotoWebView)(NSString *urlStr);
+@property (nonatomic, copy) void (^gotoWebView)(NSInteger entityId);
 
 @end

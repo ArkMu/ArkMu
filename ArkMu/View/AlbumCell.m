@@ -11,7 +11,7 @@
 #import "Common.h"
 #import <Masonry.h>
 
-#import "StreamModel.h"
+#import "EntityModel.h"
 
 #import "AlbumView.h"
 
@@ -70,19 +70,13 @@
     return self;
 }
 
-- (void)setStreamModel:(StreamModel *)streamModel {
-    _streamModel = streamModel;
+- (void)setEntityModel:(EntityModel *)entityModel {
+    _entityModel = entityModel;
     
-    _typeLabel.text = streamModel.title;
+    _typeLabel.text = entityModel.templateTitle;
     _moreLabel.text = @"更多";
     
-    if ([streamModel.entityType isEqualToString:@"theme"]) {
-        NSLog(@"streamModel");
-    }
-    
-    
-    
-    for (int i = 0; i < streamModel.entityArr.count; i++) {
+    for (int i = 0; i < entityModel.entityArr.count; i++) {
         AlbumView *view = [self.scrollView viewWithTag:10000 + i];
         if (view == nil) {
             view = [[AlbumView alloc] initWithFrame:CGRectMake(120 * 8, 0, 120, 120)];
@@ -91,11 +85,9 @@
             [self.scrollView addSubview:view];
             view.tag = 10000 + i;
         }
-        
-        view.templateInfoModel = streamModel.entityArr[i];
     }
     
-    _scrollView.contentSize = CGSizeMake(130 * streamModel.entityArr.count, 130);
+    _scrollView.contentSize = CGSizeMake(130 * entityModel.entityArr.count, 130);
 }
 
 - (void)awakeFromNib {

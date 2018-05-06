@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) NSArray<FeedModel *>  *feedArr;
 
-@property (nonatomic, copy) void (^gotoWebView)(NSString *urlStr);
+@property (nonatomic, copy) void (^gotoWebView)(NSInteger entityId);
 
 - (void)updateImageState;
 

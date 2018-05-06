@@ -9,7 +9,7 @@
 #import "BigImageCell.h"
 
 #import "Common.h"
-#import "StreamModel.h"
+#import "EntityModel.h"
 #import <Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -78,10 +78,10 @@
     return self;
 }
 
-- (void)setStreamModel:(StreamModel *)streamModel {
-    _streamModel = streamModel;
+- (void)setEntityModel:(EntityModel *)entityModel {
+    _entityModel = entityModel;
     
-    _titleLabel.text = streamModel.title;
+    _titleLabel.text = entityModel.templateTitle;
     CGRect frame = [[UIScreen mainScreen] bounds];
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -94,7 +94,7 @@
         paragraph.headIndent = 0.0;
         paragraph.tailIndent = 0.0;
         NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
-        CGRect rect = [streamModel.title boundingRectWithSize:CGSizeMake(frame.size.width - 28, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+        CGRect rect = [entityModel.templateTitle boundingRectWithSize:CGSizeMake(frame.size.width - 28, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
         __weak typeof(weakSelf) strongSelf = weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -103,8 +103,7 @@
         });
     });
     
-    NSString *urlStr = streamModel.imgsArr.firstObject;
-    [_imgView sd_setImageWithURL:[NSURL URLWithString:urlStr] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:entityModel.templateCover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
         [path addClip];
@@ -120,7 +119,7 @@
         });
     }];
     
-    _timeLabel.text = [NSString stringWithFormat:@"%@", streamModel.publishedAtTime];
+    _timeLabel.text = [NSString stringWithFormat:@"%@", entityModel.publishedAt];
 }
 
 @end

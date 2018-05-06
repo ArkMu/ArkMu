@@ -24,6 +24,8 @@
         self.cover = [dict valueForKey:@"cover"];
         
         self.coverArr = [NSArray array];
+        
+        self.entityId = [[dict valueForKey:@"entity_id"] integerValue];
     }
     
     return self;

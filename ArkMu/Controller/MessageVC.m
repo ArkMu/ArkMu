@@ -14,7 +14,7 @@
 #import <SVProgressHUD.h>
 #import "Reachability.h"
 
-#import "StreamModel.h"
+#import "EntityModel.h"
 
 #import "SmallImageCell.h"
 #import "BigImageCell.h"
@@ -27,7 +27,11 @@
 #import "TypeModel.h"
 #import "TypeCell.h"
 
+#import "TypeInfoVC.h"
 #import "InfoVC.h"
+
+#import "VideoVC.h"
+#import "AudioVC.h"
 
 static NSString *FeedCellIdentifier = @"FeedCellIdentifier";
 static NSString *TypeCellIdentifier = @"TypeCellIdentifier";
@@ -98,8 +102,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             __strong typeof(weakSelf) strongSelf = weakSelf;
             NSInteger bid = 0;
             if (strongSelf.dataArr.count > 0) {
-                StreamModel *model = (StreamModel *)strongSelf.dataArr.lastObject;
-                bid = model.streamId;
+                EntityModel *model = (EntityModel *)strongSelf.dataArr.lastObject;
+                bid = model.tempId;
             }
             [strongSelf arkMuLoadDataFromServerWithBId:bid state:NO];
         }];
@@ -149,7 +153,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             
             for (int i = 0; i < responseArr.count; i++) {
                 NSDictionary *dict = responseArr[i];
-                StreamModel *model = [StreamModel modelWithDictionary:dict];
+                EntityModel *model = [EntityModel modelWithDictionary:dict];
                 [itemsArr addObject:model];
             }
             
@@ -247,7 +251,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     } else if (indexPath.row == 1) {
         return 81;
     } else {
-        StreamModel *model = [self.dataArr objectAtIndex:indexPath.row - 2];
+        EntityModel *model = [self.dataArr objectAtIndex:indexPath.row - 2];
         if ([model.templateType isEqualToString:AKTemplateSmallImage]) {
             return 140.0;
         } else if ([model.templateType isEqualToString:AKTemplateBigImage]) {
@@ -285,6 +289,14 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FeedCellIdentifier];
         }
         cell.feedArr = self.feedArr;
+        
+        __weak typeof(self) weakSelf = self;
+        cell.gotoWebView = ^(NSInteger entityId) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            InfoVC *infoVC = [[InfoVC alloc] init];
+            infoVC.infoId = entityId;
+            [strongSelf.navigationController pushViewController:infoVC animated:NO];
+        };
         return cell;
     } else if (indexPath.row == 1) {
         TypeCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -292,24 +304,31 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             cell = [[TypeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TypeCellIdentifier];
         }
         cell.typeArr = self.typeArr;
+        __weak typeof(self) weakSelf = self;
+        cell.gotoWebView = ^(NSInteger entityId) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            
+            TypeInfoVC *typeInfoVC = [[TypeInfoVC alloc] init];
+            typeInfoVC.entityId = entityId;
+            [strongSelf.navigationController pushViewController:typeInfoVC animated:NO];
+        };
         return cell;
     } else {
-        StreamModel *model = self.dataArr[indexPath.row - 2];
+        EntityModel *model = self.dataArr[indexPath.row - 2];
         if ([model.templateType isEqualToString:AKTemplateSmallImage]) {
             SmallImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             if (cell == nil) {
                 cell = [[SmallImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SmallImageCellIdentifier];
             }
             
-            cell.streamModel = model;
-            
+            cell.entityModel = model;
             return cell;
         } else if ([model.templateType isEqualToString:AKTemplateBigImage]) {
             BigImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             if (cell == nil) {
                 cell = [[BigImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BigImageCellIdentifier];
             }
-            cell.streamModel = model;
+            cell.entityModel = model;
             return cell;
         } else if ([model.entityType isEqualToString:AKTemplateAlbum]) {
             AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -317,7 +336,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
                 cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ThemeCellIdentifier];
             }
             
-            cell.streamModel = model;
+            cell.entityModel = model;
             return cell;
         } else {
             NoImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -325,7 +344,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
                 cell = [[NoImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NoImageCellIdentifier];
             }
             
-            cell.streamModel = model;
+            cell.entityModel = model;
             return cell;
         }
     }
@@ -336,11 +355,17 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
  
-    StreamModel *streamModel = self.dataArr[indexPath.row - 2];
-    if ([streamModel.entityType isEqualToString:@"post"]) {
+    EntityModel *entityModel = self.dataArr[indexPath.row - 2];
+    if ([entityModel.entityType isEqualToString:@"post"]) {
         InfoVC *infoVC = [[InfoVC alloc] init];
-        infoVC.infoId = streamModel.entityId;
+        infoVC.infoId = entityModel.entityId;
         [self.navigationController pushViewController:infoVC animated:NO];
+    } else if ([entityModel.entityType isEqualToString:@"video"]) {
+        VideoVC *videoVC = [[VideoVC alloc] init];
+        videoVC.videoId = entityModel.entityId;
+        [self.navigationController pushViewController:videoVC animated:NO];
+    } else if ([entityModel.entityType isEqualToString:@"audio"]) {
+        
     }
 }
 
