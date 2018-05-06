@@ -13,4 +13,5 @@ target 'ArkMu' do
   pod 'ReactiveCocoa', '~> 2.4.0'
   pod 'MJRefresh'
   pod 'SVProgressHUD'
+  pod "Aspects"
 end
