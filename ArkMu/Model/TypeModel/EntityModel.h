@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSString  *templateTitle;
 @property (nonatomic, strong) NSString  *templateCover;
 
+@property (nonatomic, strong) NSMutableArray *imgsArr;
+
 @property (nonatomic, strong) NSString  *name;
 @property (nonatomic, assign) NSInteger favouriteNum;
 

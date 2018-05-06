@@ -124,18 +124,23 @@
     _descLabel.text = entityModel.name;
     _favouriteLabel.text = [NSString stringWithFormat:@"%ld 喜欢", entityModel.favouriteNum];
     
-    [_imgView sd_setImageWithURL:[NSURL URLWithString:entityModel.templateCover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
-        [path addClip];
-        [image drawAtPoint:CGPointZero];
-        UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            strongSelf.imgView.image = clipImage;
-        });
-    }];
+    if (entityModel.imgsArr.count) {
+        _imgView.image = [entityModel.imgsArr firstObject];
+    } else {
+        [_imgView sd_setImageWithURL:[NSURL URLWithString:entityModel.templateCover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
+            [path addClip];
+            [image drawAtPoint:CGPointZero];
+            UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                strongSelf.imgView.image = clipImage;
+            });
+            entityModel.imgsArr = [NSMutableArray arrayWithObject:clipImage];
+        }];
+    }
 }
 
 @end

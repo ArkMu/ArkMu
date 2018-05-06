@@ -11,6 +11,8 @@
 #import "Common.h"
 #import "MessageVC.h"
 
+#import <Aspects.h>
+
 @interface AppDelegate ()
 
 @end
