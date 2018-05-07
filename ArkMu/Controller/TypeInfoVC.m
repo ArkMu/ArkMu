@@ -76,8 +76,6 @@ static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
     [manager.sessionManager GET:AKAlbumEntityUrlWithEntityId(self.entityId) parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject: %@", responseObject);
-        
         NSArray *itemsArr = [[responseObject valueForKey:@"data"] valueForKey:@"items"];
         
         NSMutableArray *mArr = [NSMutableArray array];

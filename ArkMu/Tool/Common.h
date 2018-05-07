@@ -54,5 +54,6 @@
 #define AKTemplateBigImage      @"big_image"
 #define AKTemplateNoImage       @"no_image"
 #define AKTemplateAlbum         @"album"
+#define AKMultiImage            @"multi_image"
 
 #endif /* Common_h */

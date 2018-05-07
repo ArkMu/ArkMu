@@ -26,6 +26,7 @@
         self.templateTitle = [templateDict valueForKey:@"template_title"];
         self.templateType = [templateDict valueForKey:@"template_type"];
         self.templateCover = [[templateDict valueForKey:@"template_cover"] firstObject];
+        self.templateCoverArr = [templateDict valueForKey:@"template_cover"];
         self.imgsArr = [NSMutableArray array];
         NSDictionary *columnDic = [dict valueForKey:@"column"];
         if ([columnDic isKindOfClass:[NSDictionary class]]) {

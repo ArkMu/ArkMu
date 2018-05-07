@@ -19,6 +19,7 @@
 #import "SmallImageCell.h"
 #import "BigImageCell.h"
 #import "NoImageCell.h"
+#import "MultiImageCell.h"
 #import "AlbumCell.h"
 
 #import "FeedModel.h"
@@ -41,6 +42,7 @@ static NSString *TypeCellIdentifier = @"TypeCellIdentifier";
 static NSString *SmallImageCellIdentifier = @"SmallImageCellIdentifier";
 static NSString *BigImageCellIdentifier = @"BigImageCellIdentifier";
 static NSString *NoImageCellIdentifier = @"NoImageCellIdentifier";
+static NSString *MultiImageCellIdentifier = @"MultiImageCellIdentifier";
 static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 
 @interface MessageVC () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
@@ -76,6 +78,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     [tableView registerClass:[BigImageCell class] forCellReuseIdentifier:BigImageCellIdentifier];
     [tableView registerClass:[NoImageCell class] forCellReuseIdentifier:NoImageCellIdentifier];
     [tableView registerClass:[AlbumCell class] forCellReuseIdentifier:ThemeCellIdentifier];
+    [tableView registerClass:[MultiImageCell class] forCellReuseIdentifier:MultiImageCellIdentifier];
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -284,6 +287,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             return 320.0;
         } else if ([model.templateType isEqualToString:AKTemplateNoImage]) {
             return 100.0;
+        } else if ([model.templateType isEqualToString:AKMultiImage]) {
+            return 210.0;
         } else {
             return 210.0;
         }
@@ -356,7 +361,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             }
             cell.entityModel = model;
             return cell;
-        } else if ([model.entityType isEqualToString:AKTemplateAlbum]) {
+        } else if ([model.templateType isEqualToString:AKTemplateAlbum]) {
             AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             if (cell == nil) {
                 cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ThemeCellIdentifier];
@@ -364,10 +369,19 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             
             cell.entityModel = model;
             return cell;
-        } else {
+        } else if ([model.templateType isEqualToString:AKTemplateNoImage]) {
             NoImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             if (cell == nil) {
                 cell = [[NoImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NoImageCellIdentifier];
+            }
+            
+            cell.entityModel = model;
+            return cell;
+        } else  {
+            // multi image
+            MultiImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[MultiImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MultiImageCellIdentifier];
             }
             
             cell.entityModel = model;
@@ -382,11 +396,26 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
  
     EntityModel *entityModel = self.dataArr[indexPath.row - 2];
-    if ([entityModel.entityType isEqualToString:@"post"]) {
-        InfoVC *infoVC = [[InfoVC alloc] init];
-        infoVC.infoId = entityModel.entityId;
-        [self.navigationController pushViewController:infoVC animated:NO];
-    } else if ([entityModel.entityType isEqualToString:@"video"]) {
+//    if ([entityModel.entityType isEqualToString:@"post"]) {
+//        InfoVC *infoVC = [[InfoVC alloc] init];
+//        infoVC.infoId = entityModel.entityId;
+//        [self.navigationController pushViewController:infoVC animated:NO];
+//    } else if ([entityModel.entityType isEqualToString:@"video"]) {
+//        VideoVC *videoVC = [[VideoVC alloc] init];
+//        videoVC.videoId = entityModel.entityId;
+//        [self.navigationController pushViewController:videoVC animated:NO];
+//    } else if ([entityModel.entityType isEqualToString:@"audio"]) {
+//        AudioVC *audioVC = [[AudioVC alloc] init];
+//        audioVC.bId = entityModel.entityId;
+//        audioVC.columnId = entityModel.columnId;
+//        [self.navigationController pushViewController:audioVC animated:NO];
+//    } else if ([entityModel.entityType isEqualToString:@"theme"]) {
+//
+//    } else if ([entityModel.entityType isEqualToString:@"newsflash"]) {
+//
+//    }
+    
+    if ([entityModel.entityType isEqualToString:@"video"]) {
         VideoVC *videoVC = [[VideoVC alloc] init];
         videoVC.videoId = entityModel.entityId;
         [self.navigationController pushViewController:videoVC animated:NO];
@@ -395,6 +424,12 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
         audioVC.bId = entityModel.entityId;
         audioVC.columnId = entityModel.columnId;
         [self.navigationController pushViewController:audioVC animated:NO];
+    } else if ([entityModel.entityType isEqualToString:@"post"]) {
+        InfoVC *infoVC = [[InfoVC alloc] init];
+        infoVC.infoId = entityModel.entityId;
+        [self.navigationController pushViewController:infoVC animated:NO];
+    } else {
+        
     }
 }
 

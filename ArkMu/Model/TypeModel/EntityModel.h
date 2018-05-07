@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString  *templateType;
 @property (nonatomic, strong) NSString  *templateTitle;
 @property (nonatomic, strong) NSString  *templateCover;
+@property (nonatomic, strong) NSArray   *templateCoverArr;
 
 @property (nonatomic, strong) NSMutableArray *imgsArr;
 

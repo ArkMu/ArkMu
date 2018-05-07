@@ -103,13 +103,7 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-        paragraph.lineBreakMode = NSLineBreakByCharWrapping;
-        paragraph.alignment = NSTextAlignmentLeft;
-        paragraph.lineSpacing = 6;
-        paragraph.firstLineHeadIndent = 0.0;
-        paragraph.paragraphSpacingBefore = 0.0;
-        paragraph.headIndent = 0.0;
-        paragraph.tailIndent = 0.0;
+        paragraph.lineSpacing = 8;
         NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
         
         CGRect rect = [entityModel.templateTitle boundingRectWithSize:CGSizeMake(AKScreenWidth - 112 - 28 - 8, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
@@ -132,6 +126,17 @@
             UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
             [path addClip];
             [image drawAtPoint:CGPointZero];
+            if ([entityModel.entityType isEqualToString:@"audio"]) {
+                UIImage *audioImage = [UIImage imageNamed:@"audio"];
+                CGFloat originX = (image.size.width - 128) / 2.0;
+                CGFloat originY = (image.size.height - 128) / 2.0;
+                [audioImage drawInRect:CGRectMake(originX, originY, 128, 128)];
+            } else if ([entityModel.entityType isEqualToString:@"video"]) {
+                UIImage *videoImage = [UIImage imageNamed:@"video"];
+                CGFloat originX = (image.size.width - 128) / 2.0;
+                CGFloat originY = (image.size.height - 128) / 2.0;
+                [videoImage drawInRect:CGRectMake(originX, originY, 128, 128)];
+            }
             UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             dispatch_async(dispatch_get_main_queue(), ^{

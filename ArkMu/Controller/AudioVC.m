@@ -18,7 +18,9 @@
 
 #import "AudioModel.h"
 
-@interface AudioVC ()
+static NSString *AudioCellIdentifier = @"AudioCellIdentifier";
+
+@interface AudioVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -42,6 +44,7 @@
 
 @property (nonatomic, strong) NSMutableArray *datasArr;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *containerView;
 
 @end
 
@@ -79,9 +82,9 @@
     UIButton *focusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [focusBtn setTitle:@"+ 关注" forState:UIControlStateNormal];
     [focusBtn setTitleColor:AKWhiteColor forState:UIControlStateNormal];
-    focusBtn.titleLabel.font = AKCustomFont(10);
+    focusBtn.titleLabel.font = AKCustomFont(16);
     [focusBtn setBackgroundColor:AKLightCoral];
-    focusBtn.layer.cornerRadius = 10;
+    focusBtn.layer.cornerRadius = 16;
     focusBtn.layer.masksToBounds = YES;
     [self.view addSubview:focusBtn];
     
@@ -105,15 +108,15 @@
     [self.view addSubview:totalTimeLabel];
     _totalLabel = totalTimeLabel;
     
-    UIButton *forwardBtn = [self audioVCCreateButtonWithImage:@"forward" selector:@selector(audioVCForwardBtnAction:)];
+    UIButton *forwardBtn = [self audioVCCreateButtonWithImage:@"forwardno@2x" selector:@selector(audioVCForwardBtnAction:)];
     [self.view addSubview:forwardBtn];
     _forwardBtn = forwardBtn;
     
-    UIButton *playOrPauseBtn = [self audioVCCreateButtonWithImage:@"play" selector:@selector(audioVCPlayOrPauseBtnAction:)];
+    UIButton *playOrPauseBtn = [self audioVCCreateButtonWithImage:@"play@2x" selector:@selector(audioVCPlayOrPauseBtnAction:)];
     [self.view addSubview:playOrPauseBtn];
     _playOrPauseBtn = playOrPauseBtn;
     
-    UIButton *backwardBtn = [self audioVCCreateButtonWithImage:@"backward" selector:@selector(audioVCBackwardBtnAction:)];
+    UIButton *backwardBtn = [self audioVCCreateButtonWithImage:@"backward@2x" selector:@selector(audioVCBackwardBtnAction:)];
     [self.view addSubview:backwardBtn];
     _backwardBtn = backwardBtn;
     
@@ -154,7 +157,7 @@
     
     [focusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(-15);
-        make.size.mas_equalTo(CGSizeMake(60, 21));
+        make.size.mas_equalTo(CGSizeMake(60, 28));
         make.centerY.mas_equalTo(avtarImgView);
     }];
     
@@ -184,25 +187,26 @@
     [playOrPauseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.accessibilityViewIsModal);
         make.top.mas_equalTo(currentTimeLabel.mas_bottom).mas_equalTo(30);
-        make.size.mas_equalTo(CGSizeMake(32, 32));
+        make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
     
     [forwardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.centerY.mas_equalTo(playOrPauseBtn);
+        make.centerY.mas_equalTo(playOrPauseBtn);
+        make.size.mas_equalTo(CGSizeMake(32, 32));
         make.trailing.mas_equalTo(playOrPauseBtn.mas_leading).mas_equalTo(-30);
     }];
     
     [backwardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.centerY.mas_equalTo(playOrPauseBtn);
+        make.size.centerY.mas_equalTo(forwardBtn);
         make.leading.mas_equalTo(playOrPauseBtn.mas_trailing).mas_equalTo(30);
     }];
     
     CGFloat btnWidth = AKScreenWidth / 5.0;
     [downloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(15);
+        make.leading.mas_equalTo(self.view);
         make.height.mas_equalTo(30);
         make.width.mas_equalTo(btnWidth);
-        make.bottom.mas_equalTo(self.view).mas_equalTo(-10);
+        make.bottom.mas_equalTo(self.view).mas_equalTo(-15);
     }];
     
     [messageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -223,7 +227,10 @@
     [listBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(shareBtn.mas_trailing);
         make.size.centerY.mas_equalTo(downloadBtn);
+        make.trailing.mas_equalTo(self.view);
     }];
+    
+    [self audioVCCreateTableView];
 }
 
 - (void)viewDidLoad {
@@ -238,6 +245,7 @@
     
     _currentIndex = 0;
     _playState = NO;
+    self.title = @"暂停播放";
     [self audioVCLoadMessageFromNetwork];
 }
 
@@ -280,8 +288,13 @@
 }
 
 - (void)audioVCSetMessageWithIndex:(NSInteger)index {
-    if (self.datasArr.count == 0 || index > self.datasArr.count) {
+    if (self.datasArr.count == 0 || index >= self.datasArr.count) {
         return;
+    }
+    
+    if (self.datasArr.count == 1) {
+        [self.backwardBtn setEnabled:NO];
+        [self.backwardBtn setImage:[UIImage imageNamed:@"backwardno@2x"] forState:UIControlStateNormal];
     }
     
     AudioModel *model = self.datasArr[_currentIndex];
@@ -337,6 +350,7 @@
     [_player play];
     
     _playState = YES;
+    self.title = @"正在播放";
 }
 
 - (AVPlayer *)player {
@@ -385,9 +399,11 @@
     _currentIndex--;
     if (_currentIndex == 0) {
         _forwardBtn.enabled = NO;
+        [_forwardBtn setImage:[UIImage imageNamed:@"forwardno@2x"] forState:UIControlStateNormal];
     }
     
     _backwardBtn.enabled = YES;
+    [_backwardBtn setImage:[UIImage imageNamed:@"backward@2x"] forState:UIControlStateNormal];
     [self audioVCSetMessageWithIndex:_currentIndex];
 }
 
@@ -395,9 +411,11 @@
     _currentIndex++;
     if (_currentIndex == self.datasArr.count - 1) {
         _backwardBtn.enabled = NO;
+        [_backwardBtn setImage:[UIImage imageNamed:@"backwardno@2x"] forState:UIControlStateNormal];
     }
     
     _forwardBtn.enabled = YES;
+    [_forwardBtn setImage:[UIImage imageNamed:@"forward@2x"] forState:UIControlStateNormal];
     [self audioVCSetMessageWithIndex:_currentIndex];
 }
 
@@ -405,9 +423,11 @@
     if (_playState) {
         [self.player pause];
         [_playOrPauseBtn setImage:[UIImage imageNamed:@"play@2x"] forState:UIControlStateNormal];
+        self.title = @"暂停播放";
     } else {
         [self.player play];
         [_playOrPauseBtn setImage:[UIImage imageNamed:@"pause@2x"] forState:UIControlStateNormal];
+        self.title = @"正在播放";
     }
     
     _playState = !_playState;
@@ -438,7 +458,116 @@
 }
 
 - (void)audioVCListBtnAction:(UIButton *)sender {
+    [UIView animateWithDuration:1.0 animations:^{
+        self.containerView.transform = CGAffineTransformMakeTranslation(0, -300);
+        [self.tableView reloadData];
+    }];
+}
+
+#pragma mark - Make TableView
+
+- (void)audioVCCreateTableView {
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, AKScreenHeight, AKScreenWidth, 300)];
+    containerView.backgroundColor = AKAlphaColor(0.8);
+    self.containerView = containerView;
+    [self.view addSubview:containerView];
     
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, AKScreenWidth, 44)];
+    headerLabel.text = @"播放列表";
+    headerLabel.font = AKCustomFont(20);
+    headerLabel.textColor = AKWhiteColor;
+    headerLabel.textAlignment = NSTextAlignmentCenter;
+    [containerView addSubview:headerLabel];
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, AKScreenWidth, 212) style:UITableViewStyleGrouped];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.backgroundColor = AKClearColor;
+    [containerView addSubview:tableView];
+    _tableView = tableView;
+    
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeBtn.frame = CGRectMake(0, 256, AKScreenWidth, 44);
+    [closeBtn setImage:[UIImage imageNamed:@"close@2x"] forState:UIControlStateNormal];
+    [closeBtn addTarget:self action:@selector(audioVCCloseBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [containerView addSubview:closeBtn];
+}
+
+- (void)audioVCCloseBtnAction:(UIButton *)sender {
+    [UIView animateWithDuration:1.0 animations:^{
+        self.containerView.transform = CGAffineTransformIdentity;
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.datasArr.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, AKScreenWidth, 0)];
+    return label;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, AKScreenWidth, 0)];
+    return label;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:AudioCellIdentifier];
+    }
+    
+    AudioModel *model = self.datasArr[indexPath.row];
+    
+    cell.textLabel.text = model.title;
+    cell.textLabel.font = AKCustomFont(18);
+    if (_currentIndex == indexPath.row) {
+        cell.textLabel.textColor = AKRedColor;
+    } else {
+        cell.textLabel.textColor = AKWhiteColor;
+    }
+    
+    int duration = (int)model.duration;
+    NSString *time = [NSString stringWithFormat:@"%.2d:%.2d", duration / 60, duration % 60];
+    NSString *size = [NSString stringWithFormat:@"%ldM", model.filesize / 1024 / 256];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", time, size];
+    cell.detailTextLabel.font = AKCustomFont(14);
+    cell.detailTextLabel.textColor = AKWhiteColor;
+    
+    cell.backgroundColor = AKClearColor;
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    _currentIndex = indexPath.row;
+    [self audioVCSetMessageWithIndex:_currentIndex];
+    
+    [tableView reloadData];
 }
 
 #pragma mark - Memory Management

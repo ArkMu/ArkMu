@@ -55,13 +55,14 @@
     CGFloat scale = [[UIScreen mainScreen] scale];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(14);
-        make.trailing.bottom.mas_equalTo(-14);
+        make.trailing.mas_equalTo(-14);
+        make.bottom.mas_equalTo(self);
         make.height.mas_equalTo(1.0 / scale);
     }];
     
     [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.mas_equalTo(lineView);
-        make.bottom.mas_equalTo(lineView.mas_top).mas_equalTo(-14 + 1.0 / scale);
+        make.bottom.mas_equalTo(self).mas_equalTo(-14);
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(21);
     }];
@@ -90,13 +91,7 @@
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-        paragraph.lineBreakMode = NSLineBreakByCharWrapping;
-        paragraph.alignment = NSTextAlignmentLeft;
         paragraph.lineSpacing = 8;
-        paragraph.firstLineHeadIndent = 0.0;
-        paragraph.paragraphSpacingBefore = 0.0;
-        paragraph.headIndent = 0.0;
-        paragraph.tailIndent = 0.0;
         NSDictionary *dict = @{NSFontAttributeName: AKCustomFont(17), NSParagraphStyleAttributeName: paragraph};
         CGRect rect = [entityModel.templateTitle boundingRectWithSize:CGSizeMake(frame.size.width - 28 - 10, 80) options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
