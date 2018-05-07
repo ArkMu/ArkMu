@@ -22,6 +22,8 @@
 
 #define AKActivityUrl   @"https://36kr.com/lapi/activity"
 
+#define AKAudioBaseUrl  @"https://36kr.com/lapi/audio"
+
 #define AKColor(r, g, b, a) [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:a]
 
 #define AK102Color          AKColor(102,102,102,1)
@@ -32,10 +34,14 @@
 #define AKBlueColor         AKColor(72,118,255,1)
 #define AKLightBlueColor    AKColor(188,210,238,1)
 
+#define AKSliverColor       AKColor(161,163,166,1)
+
 #define AKAlphaColor(a)     AKColor(0,0,0,a)
 
 #define AKLightGray         [UIColor lightGrayColor]
 #define AKRedColor          [UIColor redColor]
+
+#define AKLightCoral        AKColor(240,128,128,1)
 
 #define AKCustomFont(f)     [UIFont systemFontOfSize:f]
 

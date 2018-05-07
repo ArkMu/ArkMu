@@ -24,6 +24,8 @@
 		33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165B209DEB86008A79C7 /* SmallImageCell.m */; };
 		33C9165F209DEBE4008A79C7 /* BigImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C9165E209DEBE4008A79C7 /* BigImageCell.m */; };
 		33C91662209DEC41008A79C7 /* NoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C91661209DEC41008A79C7 /* NoImageCell.m */; };
+		33CE3345209FD623006D502F /* AudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE3344209FD623006D502F /* AudioModel.m */; };
+		33CE334B209FE8C4006D502F /* UIImage+ClipImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CE334A209FE8C4006D502F /* UIImage+ClipImage.m */; };
 		33D53CA3209E7D1B00E39106 /* InfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA2209E7D1B00E39106 /* InfoVC.m */; };
 		33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA5209E7E3100E39106 /* AudioVC.m */; };
 		33D53CA9209E7E3F00E39106 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CA8209E7E3F00E39106 /* VideoVC.m */; };
@@ -90,6 +92,10 @@
 		33C9165E209DEBE4008A79C7 /* BigImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigImageCell.m; sourceTree = "<group>"; };
 		33C91660209DEC41008A79C7 /* NoImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoImageCell.h; sourceTree = "<group>"; };
 		33C91661209DEC41008A79C7 /* NoImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoImageCell.m; sourceTree = "<group>"; };
+		33CE3343209FD623006D502F /* AudioModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioModel.h; sourceTree = "<group>"; };
+		33CE3344209FD623006D502F /* AudioModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioModel.m; sourceTree = "<group>"; };
+		33CE3349209FE8C4006D502F /* UIImage+ClipImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ClipImage.h"; sourceTree = "<group>"; };
+		33CE334A209FE8C4006D502F /* UIImage+ClipImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ClipImage.m"; sourceTree = "<group>"; };
 		33D53CA1209E7D1B00E39106 /* InfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoVC.h; sourceTree = "<group>"; };
 		33D53CA2209E7D1B00E39106 /* InfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoVC.m; sourceTree = "<group>"; };
 		33D53CA4209E7E3100E39106 /* AudioVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioVC.h; sourceTree = "<group>"; };
@@ -268,6 +274,8 @@
 				33D53CB9209E94AD00E39106 /* TypeModel */,
 				33D53CEC209F2F0800E39106 /* ActivityModel.h */,
 				33D53CED209F2F0800E39106 /* ActivityModel.m */,
+				33CE3343209FD623006D502F /* AudioModel.h */,
+				33CE3344209FD623006D502F /* AudioModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -280,6 +288,8 @@
 				33A4783A209D323B00EF8E3E /* Reachability.m */,
 				33D53CBD209E993D00E39106 /* AFShareManager.h */,
 				33D53CBE209E993D00E39106 /* AFShareManager.m */,
+				33CE3349209FE8C4006D502F /* UIImage+ClipImage.h */,
+				33CE334A209FE8C4006D502F /* UIImage+ClipImage.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -478,6 +488,7 @@
 				33345493209D624A005B2513 /* AlbumView.m in Sources */,
 				33D53CC2209EC2BA00E39106 /* VideoModel.m in Sources */,
 				33C9165C209DEB86008A79C7 /* SmallImageCell.m in Sources */,
+				33CE3345209FD623006D502F /* AudioModel.m in Sources */,
 				3369FF39209BF3F100C395C6 /* main.m in Sources */,
 				33D53CF7209F426400E39106 /* WebViewVC.m in Sources */,
 				3369FF83209CA50900C395C6 /* ColumnModel.m in Sources */,
@@ -485,6 +496,7 @@
 				33D53CA6209E7E3100E39106 /* AudioVC.m in Sources */,
 				33D53CBF209E993D00E39106 /* AFShareManager.m in Sources */,
 				33D53CB8209E918100E39106 /* TypeInfoVC.m in Sources */,
+				33CE334B209FE8C4006D502F /* UIImage+ClipImage.m in Sources */,
 				333454A2209D7C5C005B2513 /* FeedCell.m in Sources */,
 				33A4783B209D323B00EF8E3E /* Reachability.m in Sources */,
 				3369FF2B209BF3EF00C395C6 /* AppDelegate.m in Sources */,

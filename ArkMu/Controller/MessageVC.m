@@ -391,7 +391,10 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
         videoVC.videoId = entityModel.entityId;
         [self.navigationController pushViewController:videoVC animated:NO];
     } else if ([entityModel.entityType isEqualToString:@"audio"]) {
-        
+        AudioVC *audioVC = [[AudioVC alloc] init];
+        audioVC.bId = entityModel.entityId;
+        audioVC.columnId = entityModel.columnId;
+        [self.navigationController pushViewController:audioVC animated:NO];
     }
 }
 
