@@ -110,7 +110,11 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo( rect.size.height);
+                if (rect.size.height > 80) {
+                    make.height.mas_equalTo(80);
+                } else {
+                    make.height.mas_equalTo( rect.size.height);
+                }
             }];
         });
     });
@@ -128,14 +132,14 @@
             [image drawAtPoint:CGPointZero];
             if ([entityModel.entityType isEqualToString:@"audio"]) {
                 UIImage *audioImage = [UIImage imageNamed:@"audio"];
-                CGFloat originX = (image.size.width - 128) / 2.0;
-                CGFloat originY = (image.size.height - 128) / 2.0;
-                [audioImage drawInRect:CGRectMake(originX, originY, 128, 128)];
+                CGFloat originX = (image.size.width - audioImage.size.width) / 2.0;
+                CGFloat originY = (image.size.height - audioImage.size.height) / 2.0;
+                [audioImage drawInRect:CGRectMake(originX, originY, audioImage.size.width, audioImage.size.height)];
             } else if ([entityModel.entityType isEqualToString:@"video"]) {
                 UIImage *videoImage = [UIImage imageNamed:@"video"];
-                CGFloat originX = (image.size.width - 128) / 2.0;
-                CGFloat originY = (image.size.height - 128) / 2.0;
-                [videoImage drawInRect:CGRectMake(originX, originY, 128, 128)];
+                CGFloat originX = (image.size.width - videoImage.size.width) / 2.0;
+                CGFloat originY = (image.size.height - videoImage.size.height) / 2.0;
+                [videoImage drawInRect:CGRectMake(originX, originY, videoImage.size.width, videoImage.size.height)];
             }
             UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();

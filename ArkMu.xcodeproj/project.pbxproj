@@ -21,7 +21,7 @@
 		3302588F20A03C9600EF0048 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3302588E20A03C9500EF0048 /* close@2x.png */; };
 		3302589620A04D9700EF0048 /* MultiImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3302589520A04D9700EF0048 /* MultiImageCell.m */; };
 		330258A720A0615200EF0048 /* audio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 330258A520A0615200EF0048 /* audio@2x.png */; };
-		330258A820A0615200EF0048 /* video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 330258A620A0615200EF0048 /* video@2x.png */; };
+		330258B220A068F800EF0048 /* video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 330258B120A068F800EF0048 /* video@2x.png */; };
 		33345484209D4AAC005B2513 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345483209D4AAC005B2513 /* AlbumCell.m */; };
 		33345493209D624A005B2513 /* AlbumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33345492209D624A005B2513 /* AlbumView.m */; };
 		333454A2209D7C5C005B2513 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333454A1209D7C5C005B2513 /* FeedCell.m */; };
@@ -78,7 +78,7 @@
 		3302589420A04D9700EF0048 /* MultiImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiImageCell.h; sourceTree = "<group>"; };
 		3302589520A04D9700EF0048 /* MultiImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiImageCell.m; sourceTree = "<group>"; };
 		330258A520A0615200EF0048 /* audio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio@2x.png"; sourceTree = "<group>"; };
-		330258A620A0615200EF0048 /* video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video@2x.png"; sourceTree = "<group>"; };
+		330258B120A068F800EF0048 /* video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video@2x.png"; sourceTree = "<group>"; };
 		33345482209D4AAC005B2513 /* AlbumCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
 		33345483209D4AAC005B2513 /* AlbumCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
 		33345491209D624A005B2513 /* AlbumView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumView.h; sourceTree = "<group>"; };
@@ -317,8 +317,8 @@
 		33D53CB1209E8A3400E39106 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				330258B120A068F800EF0048 /* video@2x.png */,
 				330258A520A0615200EF0048 /* audio@2x.png */,
-				330258A620A0615200EF0048 /* video@2x.png */,
 				3302588E20A03C9500EF0048 /* close@2x.png */,
 				3302588720A030FD00EF0048 /* backward@2x.png */,
 				3302588420A030FD00EF0048 /* backwardno@2x.png */,
@@ -424,7 +424,7 @@
 				3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */,
 				33D53CF0209F3ADA00E39106 /* back.png in Resources */,
 				3302588920A030FD00EF0048 /* forwardno@2x.png in Resources */,
-				330258A820A0615200EF0048 /* video@2x.png in Resources */,
+				330258B220A068F800EF0048 /* video@2x.png in Resources */,
 				3302587920A0303F00EF0048 /* message@2x.png in Resources */,
 				3302588F20A03C9600EF0048 /* close@2x.png in Resources */,
 				3302588820A030FD00EF0048 /* backwardno@2x.png in Resources */,

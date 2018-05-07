@@ -99,7 +99,11 @@
         __weak typeof(weakSelf) strongSelf = weakSelf;
         dispatch_async(dispatch_get_main_queue(), ^{
             [strongSelf.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(rect.size.height);
+                if (rect.size.width > 50) {
+                    make.height.mas_equalTo(50);
+                } else {
+                    make.height.mas_equalTo(rect.size.height);
+                }
             }];
         });
     });

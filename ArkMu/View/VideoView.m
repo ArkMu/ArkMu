@@ -57,8 +57,9 @@
         }];
         
         UILabel *currentLabel = [[UILabel alloc] init];
-        currentLabel.font = AKCustomFont(12.0);
+        currentLabel.font = AKCustomFont(14.0);
         currentLabel.textColor = AKWhiteColor;
+        currentLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:currentLabel];
         _currentLabel = currentLabel;
         
@@ -71,8 +72,9 @@
         _slider = slider;
         
         UILabel *totalLabel = [[UILabel alloc] init];
-        totalLabel.font = AKCustomFont(12.0);
+        totalLabel.font = AKCustomFont(14.0);
         totalLabel.textColor = AKWhiteColor;
+        totalLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:totalLabel];
         _totalLabel = totalLabel;
         
