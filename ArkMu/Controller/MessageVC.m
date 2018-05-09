@@ -180,6 +180,10 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             
             for (int i = 0; i < responseArr.count; i++) {
                 NSDictionary *dict = responseArr[i];
+                if ([[dict valueForKey:@"type"] isEqualToString:@"ad"]) {
+                    continue;
+                }
+                
                 EntityModel *model = [EntityModel modelWithDictionary:dict];
                 [itemsArr addObject:model];
             }

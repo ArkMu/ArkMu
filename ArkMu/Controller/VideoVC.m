@@ -51,6 +51,9 @@
 #pragma mark - UINavigationItemAction
 
 - (void)videoVCBackItemAction:(UIBarButtonItem *)item {
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        [[UIDevice currentDevice] performSelector:@selector(setOrientation:) withObject:@(UIInterfaceOrientationPortrait)];
+    }
     [self.navigationController popViewControllerAnimated:NO];
 }
 

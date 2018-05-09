@@ -59,6 +59,7 @@
 		33D53CF3209F3B3100E39106 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF1209F3B3100E39106 /* activity.png */; };
 		33D53CF4209F3B3100E39106 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D53CF2209F3B3100E39106 /* login.png */; };
 		33D53CF7209F426400E39106 /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D53CF6209F426400E39106 /* WebViewVC.m */; };
+		33DC668320A270F9003B00C7 /* big.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DC668220A270F9003B00C7 /* big.png */; };
 		43125B9C17E33CDF6EBFA48C /* libPods-ArkMu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +149,7 @@
 		33D53CF2209F3B3100E39106 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		33D53CF5209F426400E39106 /* WebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
 		33D53CF6209F426400E39106 /* WebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
+		33DC668220A270F9003B00C7 /* big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = big.png; sourceTree = "<group>"; };
 		56C398E6DB703028A115B7D5 /* libPods-ArkMu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArkMu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB3C8282FB10A1CAD74B0D /* Pods-ArkMu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.release.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.release.xcconfig"; sourceTree = "<group>"; };
 		C18646367BBD285D4F305399 /* Pods-ArkMu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArkMu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ArkMu/Pods-ArkMu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 		33D53CB1209E8A3400E39106 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				33DC668220A270F9003B00C7 /* big.png */,
 				330258B120A068F800EF0048 /* video@2x.png */,
 				330258A520A0615200EF0048 /* audio@2x.png */,
 				3302588E20A03C9500EF0048 /* close@2x.png */,
@@ -419,6 +422,7 @@
 				3302588A20A030FD00EF0048 /* forward@2x.png in Resources */,
 				3369FF36209BF3F100C395C6 /* LaunchScreen.storyboard in Resources */,
 				3302588320A0303F00EF0048 /* store@2x.png in Resources */,
+				33DC668320A270F9003B00C7 /* big.png in Resources */,
 				330258A720A0615200EF0048 /* audio@2x.png in Resources */,
 				3302587B20A0303F00EF0048 /* share@2x.png in Resources */,
 				3369FF33209BF3F100C395C6 /* Assets.xcassets in Resources */,

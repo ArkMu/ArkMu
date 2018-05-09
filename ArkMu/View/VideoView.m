@@ -23,10 +23,15 @@
 @property (nonatomic, strong) UILabel *currentLabel;
 @property (nonatomic, strong) UILabel *totalLabel;
 @property (nonatomic, strong) UISlider *slider;
+@property (nonatomic, strong) UIButton *bigButton;
+
+@property (nonatomic, assign) BOOL isBig;
 
 @property (nonatomic, strong) id observer;
 
 @property (nonatomic, assign) CGFloat totalVideoTime;
+
+@property (nonatomic, assign) CGRect originFrame;
 
 @end
 
@@ -36,6 +41,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
+        _originFrame = frame;
         self.player = [[AVPlayer alloc] init];
 
         AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
@@ -123,6 +129,10 @@
     }
     
     _isPlaying = !_isPlaying;
+}
+
+- (void)videoViewBigOrSmallButtonAction:(UIButton *)sender {
+    
 }
 
 - (void)setPlayerNil {
