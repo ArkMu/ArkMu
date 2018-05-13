@@ -138,47 +138,38 @@
         });
     });
     
-    if (entityModel.imgsArr.count == 0) {
-        [_leftImgView sd_setImageWithURL:[NSURL URLWithString:[entityModel.templateCoverArr objectAtIndex:0]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            __weak typeof(self) weakSelf = self;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *clipImage = [image clipImageWithCornerRadius:0.1 * image.size.width];
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    strongSelf.leftImgView.image = clipImage;
-                });
-                [strongSelf.entityModel.imgsArr addObject:clipImage];
+    [_leftImgView sd_setImageWithURL:[NSURL URLWithString:[entityModel.templateCoverArr objectAtIndex:0]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *clipImage = [image clipImageWithCornerRadius:0.1 * image.size.width];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.leftImgView.image = clipImage;
             });
-        }];
+        });
+    }];
         
-        [_centerImgView sd_setImageWithURL:[NSURL URLWithString:[entityModel.templateCoverArr objectAtIndex:1]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            __weak typeof(self) weakSelf = self;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *clipImage = [image clipImageWithCornerRadius:0.1 * image.size.width];
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    strongSelf.centerImgView.image = clipImage;
-                });
-                [strongSelf.entityModel.imgsArr addObject:clipImage];
+    [_centerImgView sd_setImageWithURL:[NSURL URLWithString:[entityModel.templateCoverArr objectAtIndex:1]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *clipImage = [image clipImageWithCornerRadius:0.1 * image.size.width];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.centerImgView.image = clipImage;
             });
-        }];
+        });
+    }];
         
-        [_rightImgView sd_setImageWithURL:[NSURL URLWithString:[entityModel.templateCoverArr objectAtIndex:2]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            __weak typeof(self) weakSelf = self;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *clipImage = [image clipImageWithCornerRadius:0.1 * image.size.width];
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    strongSelf.rightImgView.image = clipImage;
-                });
-                [strongSelf.entityModel.imgsArr addObject:clipImage];
+    [_rightImgView sd_setImageWithURL:[NSURL URLWithString:[entityModel.templateCoverArr objectAtIndex:2]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *clipImage = [image clipImageWithCornerRadius:0.1 * image.size.width];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.rightImgView.image = clipImage;
             });
-        }];
-    } else {
-        _leftImgView.image = [entityModel.imgsArr objectAtIndex:0];
-        _centerImgView.image = [entityModel.imgsArr objectAtIndex:1];
-        _rightImgView.image = [entityModel.imgsArr objectAtIndex:2];
-    }
+        });
+    }];
     
     _descLabel.text = entityModel.name;
     _storeLabel.text = [NSString stringWithFormat:@"%lu收藏", entityModel.favouriteNum];

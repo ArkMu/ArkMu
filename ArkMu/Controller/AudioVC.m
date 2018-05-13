@@ -299,41 +299,29 @@ static NSString *AudioCellIdentifier = @"AudioCellIdentifier";
     
     AudioModel *model = self.datasArr[_currentIndex];
     
-    if (model.coverArr.count) {
-        _imgView.image = [model.coverArr firstObject];
-    } else {
-        __weak typeof(self) weakSelf = self;
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:model.cover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            __strong typeof(weakSelf) strongSelf = weakSelf; dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *clipImage = [image clipImageWithCornerRadius:12];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    strongSelf.imgView.image = clipImage;
-                    [strongSelf.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.mas_equalTo((AKScreenWidth - 120) / clipImage.size.width * clipImage.size.height);
-                    }];
-                });
-                model.coverArr = [NSArray arrayWithObject:clipImage];
+    __weak typeof(self) weakSelf = self;
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:model.cover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        __strong typeof(weakSelf) strongSelf = weakSelf; dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *clipImage = [image clipImageWithCornerRadius:12];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.imgView.image = clipImage;
+                [strongSelf.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo((AKScreenWidth - 120) / clipImage.size.width * clipImage.size.height);
+                }];
             });
-        }];
-    }
+        });
+    }];
     
     _titleLabel.text = model.title;
-    
-    if (model.avtarArr.count) {
-        _avatarImgView.image = [model.avtarArr firstObject];
-    } else {
-        __weak typeof(self) weakSelf = self;
-        [_avatarImgView sd_setImageWithURL:[NSURL URLWithString:model.userAvtarUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *clipImage = [image clipImageWithCornerRadius:0.2 * image.size.width];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    strongSelf.avatarImgView.image = clipImage;
-                });
-                model.avtarArr = [NSArray arrayWithObject:clipImage];
+    [_avatarImgView sd_setImageWithURL:[NSURL URLWithString:model.userAvtarUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *clipImage = [image clipImageWithCornerRadius:0.2 * image.size.width];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                strongSelf.avatarImgView.image = clipImage;
             });
-        }];
-    }
+        });
+    }];
     
     _descLabel.text = model.userName;
     

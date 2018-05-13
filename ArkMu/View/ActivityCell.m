@@ -68,25 +68,20 @@
 - (void)setActivityModel:(ActivityModel *)activityModel {
     _activityModel = activityModel;
     
-    if (activityModel.imgsArr.count) {
-        _imgView.image = [activityModel.imgsArr firstObject];
-    } else {
-        __weak typeof(self) weakSelf = self;
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:activityModel.cover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
-            [path addClip];
-            [image drawAtPoint:CGPointZero];
-            UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            activityModel.imgsArr = [NSMutableArray arrayWithObject:clipImage];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.imgView.image = clipImage;
-            });
-        }];
-    }
+    __weak typeof(self) weakSelf = self;
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:activityModel.cover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
+        [path addClip];
+        [image drawAtPoint:CGPointZero];
+        UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            strongSelf.imgView.image = clipImage;
+        });
+    }];
     
     _titleLabel.text = activityModel.subject;
 }

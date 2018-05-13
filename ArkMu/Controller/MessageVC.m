@@ -44,6 +44,7 @@ static NSString *BigImageCellIdentifier = @"BigImageCellIdentifier";
 static NSString *NoImageCellIdentifier = @"NoImageCellIdentifier";
 static NSString *MultiImageCellIdentifier = @"MultiImageCellIdentifier";
 static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
+static NSString *AlbumCellIdentifier = @"AlbumCellIdentifier";
 
 @interface MessageVC () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -79,6 +80,7 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     [tableView registerClass:[NoImageCell class] forCellReuseIdentifier:NoImageCellIdentifier];
     [tableView registerClass:[AlbumCell class] forCellReuseIdentifier:ThemeCellIdentifier];
     [tableView registerClass:[MultiImageCell class] forCellReuseIdentifier:MultiImageCellIdentifier];
+    [tableView registerClass:[AlbumCell class] forCellReuseIdentifier:AlbumCellIdentifier];
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -319,7 +321,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        FeedCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        FeedCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:FeedCellIdentifier];
         if (cell == nil) {
             cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FeedCellIdentifier];
         }
@@ -334,7 +337,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
         };
         return cell;
     } else if (indexPath.row == 1) {
-        TypeCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        TypeCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        TypeCell *cell = [tableView dequeueReusableCellWithIdentifier:TypeCellIdentifier];
         if (cell == nil) {
             cell = [[TypeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TypeCellIdentifier];
         }
@@ -351,7 +355,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
     } else {
         EntityModel *model = self.dataArr[indexPath.row - 2];
         if ([model.templateType isEqualToString:AKTemplateSmallImage]) {
-            SmallImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            SmallImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            SmallImageCell *cell = [tableView dequeueReusableCellWithIdentifier:SmallImageCellIdentifier];
             if (cell == nil) {
                 cell = [[SmallImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SmallImageCellIdentifier];
             }
@@ -359,14 +364,16 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             cell.entityModel = model;
             return cell;
         } else if ([model.templateType isEqualToString:AKTemplateBigImage]) {
-            BigImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            BigImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            BigImageCell *cell = [tableView dequeueReusableCellWithIdentifier:BigImageCellIdentifier];
             if (cell == nil) {
                 cell = [[BigImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BigImageCellIdentifier];
             }
             cell.entityModel = model;
             return cell;
         } else if ([model.templateType isEqualToString:AKTemplateAlbum]) {
-            AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            AlbumCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            AlbumCell *cell = [tableView dequeueReusableCellWithIdentifier:AlbumCellIdentifier];
             if (cell == nil) {
                 cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ThemeCellIdentifier];
             }
@@ -374,7 +381,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             cell.entityModel = model;
             return cell;
         } else if ([model.templateType isEqualToString:AKTemplateNoImage]) {
-            NoImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            NoImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NoImageCell *cell = [tableView dequeueReusableCellWithIdentifier:NoImageCellIdentifier];
             if (cell == nil) {
                 cell = [[NoImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NoImageCellIdentifier];
             }
@@ -383,7 +391,8 @@ static NSString *ThemeCellIdentifier = @"ThemeCellIdentifier";
             return cell;
         } else  {
             // multi image
-            MultiImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            MultiImageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            MultiImageCell *cell = [tableView dequeueReusableCellWithIdentifier:MultiImageCellIdentifier];
             if (cell == nil) {
                 cell = [[MultiImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MultiImageCellIdentifier];
             }

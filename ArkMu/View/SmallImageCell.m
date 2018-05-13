@@ -121,35 +121,30 @@
     
     _descLabel.text = entityModel.name;
     _favouriteLabel.text = [NSString stringWithFormat:@"%ld 喜欢", entityModel.favouriteNum];
-    
-    if (entityModel.imgsArr.count) {
-        _imgView.image = [entityModel.imgsArr firstObject];
-    } else {
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:entityModel.templateCover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
-            [path addClip];
-            [image drawAtPoint:CGPointZero];
-            if ([entityModel.entityType isEqualToString:@"audio"]) {
-                UIImage *audioImage = [UIImage imageNamed:@"audio"];
-                CGFloat originX = (image.size.width - audioImage.size.width) / 2.0;
-                CGFloat originY = (image.size.height - audioImage.size.height) / 2.0;
-                [audioImage drawInRect:CGRectMake(originX, originY, audioImage.size.width, audioImage.size.height)];
-            } else if ([entityModel.entityType isEqualToString:@"video"]) {
-                UIImage *videoImage = [UIImage imageNamed:@"video"];
-                CGFloat originX = (image.size.width - videoImage.size.width) / 2.0;
-                CGFloat originY = (image.size.height - videoImage.size.height) / 2.0;
-                [videoImage drawInRect:CGRectMake(originX, originY, videoImage.size.width, videoImage.size.height)];
-            }
-            UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            dispatch_async(dispatch_get_main_queue(), ^{
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                strongSelf.imgView.image = clipImage;
-            });
-            entityModel.imgsArr = [NSMutableArray arrayWithObject:clipImage];
-        }];
-    }
+
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:entityModel.templateCover] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, image.size.width, image.size.height) cornerRadius:12];
+        [path addClip];
+        [image drawAtPoint:CGPointZero];
+        if ([entityModel.entityType isEqualToString:@"audio"]) {
+            UIImage *audioImage = [UIImage imageNamed:@"audio"];
+            CGFloat originX = (image.size.width - audioImage.size.width) / 2.0;
+            CGFloat originY = (image.size.height - audioImage.size.height) / 2.0;
+            [audioImage drawInRect:CGRectMake(originX, originY, audioImage.size.width, audioImage.size.height)];
+        } else if ([entityModel.entityType isEqualToString:@"video"]) {
+            UIImage *videoImage = [UIImage imageNamed:@"video"];
+            CGFloat originX = (image.size.width - videoImage.size.width) / 2.0;
+            CGFloat originY = (image.size.height - videoImage.size.height) / 2.0;
+            [videoImage drawInRect:CGRectMake(originX, originY, videoImage.size.width, videoImage.size.height)];
+        }
+        UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf.imgView.image = clipImage;
+        });
+    }];
 }
 
 @end
